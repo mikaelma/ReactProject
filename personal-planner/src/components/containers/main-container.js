@@ -14,7 +14,7 @@ const styles = {
         flex: 1,
         height: '90vh',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 }
 

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { AppBar, Button } from 'material-ui';
-import MainContainer from './components/containers/main-container';
+import MainContainer from '../components/containers/main-container';
+import BigCalendar from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import moment from 'moment';
 
-class LayoutMain extends Component {
+class MainPage extends Component {
     constructor(props){
         super(props)
+
+        BigCalendar.setLocalizer(
+            BigCalendar.momentLocalizer(moment)
+        );
     }
 
     render(){
@@ -20,7 +27,11 @@ class LayoutMain extends Component {
                         TODOLIST
                     </MainContainer>
                     <MainContainer>
-                        Calendar
+                        <BigCalendar
+                            events={[]}
+                            startAccessor='startDate'
+                            endAccessor='endDate'
+                        />
                     </MainContainer>
                 </div>
             </div>
@@ -36,4 +47,4 @@ const style = {
     },
 };
 
-export default LayoutMain;
+export default MainPage;
