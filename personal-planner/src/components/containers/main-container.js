@@ -14,7 +14,8 @@ const styles = {
         flex: 1,
         height: '90vh',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        flexDirection: 'column'
     },
 }
 
