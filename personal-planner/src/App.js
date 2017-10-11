@@ -19,7 +19,6 @@ class App extends Component{
                 <AppBar
                     title='Kollektivet'
                     onTitleTouchTap={() => this.nextPath('/') }
-                    titleStyle={(}
                     showMenuIconButton={false}
                     iconClassNameRight="fa fa-user"
                     onRightIconButtonTouchTap={() => this.nextPath('/Profile') }
