@@ -80,11 +80,6 @@ class ProfilePage extends Component{
         display: 'flex',
         flexDirection: 'column',
         flex: 1
-    },
-        dropDownMenuStyle: {
-        marginLeft: -23,
-        width: 200,
-        marginBottom: 10
     }
     };
 

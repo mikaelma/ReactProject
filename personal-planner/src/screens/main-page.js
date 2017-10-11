@@ -7,6 +7,7 @@ import Calendar from '../components/calendar/calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
 import 'moment/locale/nb';
+import TodoList from '../components/lists/todo-list';
 
 class MainPage extends Component {
     constructor(props) {
@@ -84,8 +85,9 @@ class MainPage extends Component {
                                       onClick={this.handleOpen}/>
                     </MainContainer>
                     <MainContainer>
-                        TODOLIST
+                        <TodoList/>
                     </MainContainer>
+
                 </div>
                 <Dialog
                     title="Reservasjon"
