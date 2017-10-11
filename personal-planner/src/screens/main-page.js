@@ -17,11 +17,6 @@ class MainPage extends Component {
     render(){
         return (
             <div>
-                <AppBar
-                    title='Kollektivet'
-                    showMenuIconButton={false}
-                    iconClassNameRight="fa fa-user"
-                />
                 <div style={style.mainContainerStyle}>
                     <MainContainer>
                         TODOLIST
