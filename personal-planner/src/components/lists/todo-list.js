@@ -11,23 +11,26 @@ class TodoList extends Component{
 
     }
 
-    updateCheck(){
+    updateCheck = (index) => {
         this.setState((oldState) => {
-            return{
-                checked: !oldState.check,
-            };
+            let item = oldState.elements[index];
+            item.checked = !item.checked;
+            oldState.elements[index] = item;
+            return oldState;
         });
     }
 
     render(){
+        let self = this
         return(
             <div style={style.containerStyle}>
-                {this.state.elements.map(function(element){
+                {this.state.elements.map(function(element,index){
                     return <Checkbox
                         label={element.title}
                         checked={element.checked}
-                        onCheck={this.updateCheck.bind(this)}
-                        />
+                        index={index}
+                        onCheck={() => self.updateCheck(index)}
+                    />
                 })};
             </div>
         );
