@@ -3,6 +3,7 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 
 class TodoList extends Component{
+
   constructor(props) {
     super(props);
 
@@ -55,15 +56,16 @@ class TodoList extends Component{
                 floatingLabelText="Legg til nytt element"
             />
 
-                {this.state.elements.map(function(element, index) {
-                return <Checkbox
-                    label={element.title}
-                    checked={element.checked}
-                    key={index}
-                    onCheck={ (e) => self.handleCheck(e, index)}
-                    />
-              })};
-            </div>
+            {this.state.elements.map(function(element, index) {
+            return <Checkbox
+                label={element.title}
+                checked={element.checked}
+                key={index}
+                onCheck={ (e) => self.handleCheck(e, index)}
+                />
+            })}
+
+        </div>
     );
   }
 }
