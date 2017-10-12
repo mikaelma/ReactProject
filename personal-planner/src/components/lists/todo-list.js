@@ -25,12 +25,14 @@ class TodoList extends Component{
         return(
             <div style={style.containerStyle}>
                 {this.state.elements.map(function(element,index){
+
                     return <Checkbox
                         label={element.title}
                         checked={element.checked}
                         index={index}
                         onCheck={() => self.updateCheck(index)}
                     />
+
                 })};
             </div>
         );
