@@ -10,6 +10,7 @@ const TimePickerForm = (props) => {
                 format='24hr'
                 onChange={(event, time) => props.setTime(time)}
                 textFieldStyle={{width: props.width}}
+                errorText={props.errorText}
             />
         </div>
     )
