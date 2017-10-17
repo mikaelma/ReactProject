@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/nb';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -13,16 +14,18 @@ class Calendar extends Component{
 
         this.state = {
             calendarView: 'week'
-        }
+        };
     }
 
     render(){
         return (
                 <BigCalendar
                     style={style.calendarStyle}
-                    events={[]}
-                    startAccessor='startDate'
-                    endAccessor='endDate'
+                    events={this.props.events}
+                    defaultDate={new Date()}
+                    startAccessor='start'
+                    endAccessor='end'
+                    titleAccessor='title'
                     messages={messages}
                     selectable={true}
                     views={['month', 'week', 'day']}

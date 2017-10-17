@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MainPage from './screens/main-page';
 import Main from './main';
-import { AppBar, Button } from 'material-ui';
+import { AppBar } from 'material-ui';
 
 import './App.css';
 
@@ -15,7 +12,7 @@ class App extends Component{
 
     render(){
         return (
-            <MuiThemeProvider>
+            <div>
                 <AppBar
                     title='Kollektivet'
                     onTitleTouchTap={() => this.nextPath('/') }
@@ -25,9 +22,8 @@ class App extends Component{
                     style={{marginBottom: 30}}
                 >
                 </AppBar>
-                <Main
-                />
-            </MuiThemeProvider>
+                <Main />
+            </div>
         )
     }
 };

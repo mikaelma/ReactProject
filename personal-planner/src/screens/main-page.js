@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {AppBar, RaisedButton, Dialog, DropDownMenu, MenuItem, TimePicker, FlatButton} from 'material-ui';
-import DateForm from '../components/form/date-picker';
-import TimePickerForm from '../components/form/time-picker';
+import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
+import { DateForm, TimePickerForm } from '../components/form';
 import MainContainer from '../components/containers/main-container';
 import Calendar from '../components/calendar/calendar';
-import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
 import 'moment/locale/nb';
 import TodoList from '../components/lists/todo-list';
@@ -20,11 +18,33 @@ class MainPage extends Component {
             endTime: null,
             date: null,
             desktop: window.innerWidth < 700 ? false : true,
+            events: [],
+            dateErrorText: '',
+            startTimeErrorText: '',
+            endTimeErrorText: ''
         };
 
         //Listener for window size
         const mq = window.matchMedia("(min-width: 700px)");
         mq.addListener(this.WidthChange);
+    }
+
+    /**
+     * Fetches events from localstorage and adds them to state before the component is rendered
+     * @returns {Promise.<void>}
+     */
+    async componentWillMount(){
+        let events = await JSON.parse(localStorage.getItem("events"));
+        if (events){
+            //Converts date strings to date object
+            events.map((e) => {
+                e.start = moment(e.start).toDate();
+                e.end = moment(e.end).toDate();
+            });
+            return this.setState({ events })
+
+        }
+        this.setState({ events: [] })
     }
 
     /**
@@ -38,20 +58,6 @@ class MainPage extends Component {
         } else {
             this.setState({desktop: false})
         }
-    };
-
-    /**
-     * Opens Dialog
-     */
-    handleOpen = () => {
-        this.setState({open: true});
-    };
-
-    /**
-     * Closes Dialog
-     */
-    handleClose = () => {
-        this.setState({open: false});
     };
 
     /**
@@ -71,8 +77,51 @@ class MainPage extends Component {
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
     }
 
+    /**
+     * Resets all form fields when dialog closes.
+     */
+    handleClose = () => {
+        this.setState({
+            dateErrorText: '',
+            startTimeErrorText: '',
+            endTimeErrorText: '',
+            open: false,
+            date: null,
+            startTime: null,
+            endTime: null
+        })
+    };
+
+    /**
+     * Stores the booking done in the calendar. First checks if some fields are empty and displays errrortext if they are.
+     * Also checks if endtime is before start time
+     * If everything is filled correctly adds the new event to state and stores the whole array in localstorage
+     * @returns {Promise.<void>}
+     */
     saveBooking = () => {
-        console.log(this.state.date, this.state.startTime, this.state.endTime)
+        const { date, startTime, endTime } = this.state;
+        //If no information in the form elements
+        if (!date || !startTime || !endTime){
+            //Adds text to the errortext states
+            date ? this.setState({ dateErrorText: ''}) : this.setState({ dateErrorText: 'Dato mangler' });
+            startTime ? this.setState({ startTimeErrorText: ''}) : this.setState({ startTimeErrorText: 'Start tid mangler' });
+            endTime ? this.setState({ endTimeErrorText: ''}) : this.setState({ endTimeErrorText: 'Slutt tid mangler' });
+            return;
+        //If end time is before start time
+        } if (moment(endTime).isBefore(moment(startTime))){
+            //Sets errortext to state
+            return this.setState({  dateErrorText: '', startTimeErrorText: '', endTimeErrorText: 'Slutt tid er før Start tid'});
+        //If everything is filled correctly
+        } else {
+            this.setState({
+                events: [...this.state.events, {'title': this.state.value,
+                    'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
+                    'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
+            }, () => {
+                localStorage.setItem("events", JSON.stringify(this.state.events));
+                this.handleClose();
+            });
+        }
     };
 
     render() {
@@ -80,9 +129,9 @@ class MainPage extends Component {
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
                     <MainContainer>
-                        <Calendar />
+                        <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
-                                      onClick={this.handleOpen}/>
+                                      onClick={() => this.setState({open: true})}/>
                     </MainContainer>
                     <MainContainer>
                         <TodoList/>
@@ -117,6 +166,7 @@ class MainPage extends Component {
                                 setDate={(date) => this.setState({date})}
                                 width={155}
                                 marginRight={10}
+                                errorText={this.state.dateErrorText}
                             />
                             <TimePickerForm
                                 title="Start"
@@ -125,6 +175,7 @@ class MainPage extends Component {
                                 width={155}
                                 marginLeft={10}
                                 marginRight={10}
+                                errorText={this.state.startTimeErrorText}
                             />
                             <TimePickerForm
                                 title="Slutt"
@@ -133,6 +184,7 @@ class MainPage extends Component {
                                 width={155}
                                 marginLeft={10}
                                 marginRight={0}
+                                errorText={this.state.endTimeErrorText}
                             />
                         </div>
                         <div style={{display: 'flex', flexDirection: 'row', flex: 1, marginTop: 5}}>

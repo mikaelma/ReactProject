@@ -11,6 +11,7 @@ const DateForm = (props) => {
                 onChange={(event, date) => props.setDate(date)}
                 formatDate={props.formatDate}
                 textFieldStyle={{width: props.width}}
+                errorText={props.errorText}
             />
         </div>
     )
