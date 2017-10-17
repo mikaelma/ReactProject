@@ -16,6 +16,7 @@ class Calendar extends Component{
             calendarView: 'week'
         };
     }
+    
 
     render(){
         return (

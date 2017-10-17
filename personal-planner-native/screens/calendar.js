@@ -50,7 +50,7 @@ class Calendar extends Component{
                 const strTime = this.timeToString(time);
                 if (!this.state.items[strTime]) {
                     this.state.items[strTime] = [];
-                    const numItems = Math.floor(Math.random() * 5);
+                    const numItems = 5;
                     for (let j = 0; j < numItems; j++) {
                         this.state.items[strTime].push({
                             name: 'Item for ' + strTime,

@@ -6,15 +6,23 @@ class TodoList extends Component{
 
   constructor(props) {
     super(props);
-
-
     this.state = {
         fieldValue: '',
-        elements: [{title: 'Gaa paa do', checked: true},
-            {title: 'Vaske kjøkken', checked: false},
-            {title: 'Lufte hamster', checked: false},
-            {title: 'Rydde etter fest', checked: false}],
-      };
+        elements:[]
+    };
+    
+}
+
+async componentWillMount(){
+    let elements = await window.localStorage.getItem('todo_elements');
+    
+    if(elements){
+        console.log(elements);
+        this.setState({
+            elements:JSON.parse(elements)
+        });
+    }
+
   }
 
   handleCheck = (e, index) => {
@@ -23,16 +31,25 @@ class TodoList extends Component{
       elements[index].checked = !elements[index].checked;
       this.setState({
           elements: elements,
+      }, () => {
+          window.localStorage.setItem('todo_elements',JSON.stringify(this.state.elements));
       })
-  }
+  };
 
   handleFieldKeyDown = (e) => {
       switch (e.key){
           case 'Enter':
+            let elements = this.state.elements
+            let obj = {
+                title:e.target.value,
+                checked:false
+            }
+            elements.push(obj)
               this.setState({
-                    elements: [...this.state.elements, {title: e.target.value, checked: false}],
+                    elements:elements,
                     fieldValue: '',
               });
+              window.localStorage.setItem('todo_elements',JSON.stringify(this.state.elements));
               break;
       }
   }
