@@ -6,35 +6,35 @@ class TodoList extends Component{
         super(props);
 
         this.state = {
-            elements: [{title: 'Gaa paa do', checked: true}, {title: 'Vaske kjøkken', checked: false}, {title: 'Lufte hamster', checked: false}, {title: 'Rydde etter fest', checked:false}],
+            elements:[
+                {title: 'Gaa paa do',       checked: true},
+                {title: 'Vaske kjøkken',    checked: false},
+                {title: 'Lufte hamster',    checked: true},
+                {title: 'Rydde etter fest', checked: false}
+            ],
         };
-
+        this.updateCheck = this.updateCheck.bind(this);
     }
 
-    updateCheck(){
-        this.setState((oldState) => {
-            return{
-                checked: !oldState.check,
-            };
-        });
+    updateCheck(event, value) {
+        console.log(value + " updating check!");
     }
 
     render(){
         return(
             <div style={style.containerStyle}>
-                {this.state.elements.map(function(element){
-                    return <Checkbox
+                {this.state.elements.map((element, index) =>
+                    <Checkbox
                         label={element.title}
-                        checked={element.checked}
-                        onCheck={this.updateCheck.bind(this)}
-                        />
-                })};
+                        id={index}
+                        onCheck={ () => this.updateCheck({index})}
+
+                    />
+                )}
             </div>
         );
     }
 }
-
-
 
 const style = {
     containerStyle: {
