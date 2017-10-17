@@ -101,19 +101,18 @@ class ProfilePage extends Component {
                         alignItems: 'center'
                     }}
                 >
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Navn:</strong>
+                    <div>
                         {firstnameField + " " + surnameField}
-
                     </div>
-
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Epost:</strong>
+                    <div>
                         {emailField}
                     </div>
-
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Telefonnr:</strong>
+                    <div>
                         {telephoneField}
                     </div>
-
                     <RaisedButton
                         primary={true}
                         style={{marginTop: 20}}
@@ -140,35 +139,30 @@ class ProfilePage extends Component {
                         value={firstnameField}
                         errorText={firstnameErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Etternavn"
                         onChange={(e) => this.setState({surnameField: e.target.value, surnameErrorText: ''})}
                         value={surnameField}
                         errorText={surnameErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Epost"
                         onChange={(e) => this.setState({emailField: e.target.value, emailErrorText: ''})}
                         value={emailField}
                         errorText={emailErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Telefon"
                         onChange={(e) => this.setState({telephoneField: e.target.value, telephoneErrorText: ''})}
                         value={telephoneField}
                         errorText={telephoneErrorText}
                     />
-
                     <RaisedButton
                         primary={true}
                         label={"Lagre"}
                         onClick={this.handleClick}
                         style={{marginTop: 20}}
                     />
-
                 </div>
             )
         }

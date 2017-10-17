@@ -25,6 +25,7 @@ class MainPage extends Component {
             dateErrorText: '',
             startTimeErrorText: '',
             endTimeErrorText: '',
+            name: ''
         };
 
         //Listener for window size
@@ -38,16 +39,18 @@ class MainPage extends Component {
      */
     async componentWillMount(){
         let events = await JSON.parse(localStorage.getItem("events"));
+        let userInformation = await JSON.parse(localStorage.getItem("info"));
         if (events){
             //Converts date strings to date object
             events.map((e) => {
                 e.start = moment(e.start).toDate();
                 e.end = moment(e.end).toDate();
             });
-            return this.setState({ events })
-
+            this.setState({ events })
         }
-        this.setState({ events: [] })
+        userInformation ?
+            this.setState({ name: userInformation.firstnameField + ' ' + userInformation.surnameField}) :
+            this.setState({ name: '' });
     }
 
     /**
@@ -102,7 +105,7 @@ class MainPage extends Component {
      * @returns {Promise.<void>}
      */
     saveBooking = () => {
-        const { date, startTime, endTime } = this.state;
+        const { date, startTime, endTime, events, name, value } = this.state;
         //If no information in the form elements
         if (!date || !startTime || !endTime){
             //Adds text to the errortext states
@@ -117,7 +120,7 @@ class MainPage extends Component {
         //If everything is filled correctly
         } else {
             this.setState({
-                events: [...this.state.events, {'title': this.state.value,
+                events: [...this.state.events, {'title': name ? `${value} - ${name}` : value,
                     'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
                     'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
             }, () => {
