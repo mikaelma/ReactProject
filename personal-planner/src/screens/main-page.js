@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
 import { DateForm, TimePickerForm } from '../components/form';
 import MainContainer from '../components/containers/main-container';
+import ToDoContainer from '../components/containers/todo-container';
+import CalendarContainer from '../components/containers/calendar-container';
 import Calendar from '../components/calendar/calendar';
 import moment from 'moment';
 import 'moment/locale/nb';
 import TodoList from '../components/lists/todo-list';
+
 
 class MainPage extends Component {
     constructor(props) {
@@ -21,7 +24,7 @@ class MainPage extends Component {
             events: [],
             dateErrorText: '',
             startTimeErrorText: '',
-            endTimeErrorText: ''
+            endTimeErrorText: '',
         };
 
         //Listener for window size
@@ -124,18 +127,18 @@ class MainPage extends Component {
         }
     };
 
-    render() {
+    render(){
         return (
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
-                    <MainContainer>
+                    <ToDoContainer>
+                        <TodoList />
+                    </ToDoContainer>
+                    <CalendarContainer>
                         <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>
-                    </MainContainer>
-                    <MainContainer>
-                        <TodoList/>
-                    </MainContainer>
+                    </CalendarContainer>
 
                 </div>
                 <Dialog
@@ -203,7 +206,8 @@ const style = {
     mainStyle: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
+        padding: 20,
     },
     dropDownMenuStyle: {
         marginLeft: -23,

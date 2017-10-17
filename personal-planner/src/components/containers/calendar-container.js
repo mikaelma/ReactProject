@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MainContainer = (props) => {
+const CalendarContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
             {props.children}
@@ -11,12 +11,12 @@ const MainContainer = (props) => {
 const styles = {
     containerStyle: {
         display: 'flex',
-        height: '90vh',
-        flex: 1,
+        height: '80vh',
+        flex: 2,
         justifyContent: 'center',
         alignItems: 'flex-start',
         flexDirection: 'column'
     },
 }
 
-export default MainContainer;
+export default CalendarContainer;
