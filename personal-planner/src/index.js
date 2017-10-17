@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ProfilePage from './screens/profile-page';
+import NotePage  from './screens/note-page';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from './App';
@@ -14,6 +15,7 @@ ReactDOM.render((
             <div>
                 <Route path='/' component={App} />
                 <Route path = {'/Profile'} component = {ProfilePage} />
+                <Route path = {'/Notes'} component = {NotePage} />
             </div>
         </BrowserRouter>
     </MuiThemeProvider>),
