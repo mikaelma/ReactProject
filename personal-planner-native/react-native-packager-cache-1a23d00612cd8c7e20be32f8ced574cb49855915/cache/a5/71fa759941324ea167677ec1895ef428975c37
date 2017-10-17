@@ -1,0 +1,117 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/matz-leander/projects/webutvikling/it2810-webutvikling-h17-prosjekt-3-group-34/personal-planner-native/node_modules/react-native-calendars/src/calendar/day/basic/index.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = babelHelpers.interopRequireDefault(_propTypes);
+
+var _style = require('./style');
+
+var _style2 = babelHelpers.interopRequireDefault(_style);
+
+var Day = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(Day, _Component);
+
+  function Day(props) {
+    babelHelpers.classCallCheck(this, Day);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).call(this, props));
+
+    _this.style = (0, _style2.default)(props.theme);
+    _this.onDayPress = _this.onDayPress.bind(_this);
+    return _this;
+  }
+
+  babelHelpers.createClass(Day, [{
+    key: 'onDayPress',
+    value: function onDayPress() {
+      this.props.onPress(this.props.day);
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps) {
+      var _this2 = this;
+
+      return ['state', 'children', 'marked', 'onPress', 'markingExists'].reduce(function (prev, next) {
+        if (prev || nextProps[next] !== _this2.props[next]) {
+          return true;
+        }
+        return prev;
+      }, false);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var containerStyle = [this.style.base];
+      var textStyle = [this.style.text];
+      var dotStyle = [this.style.dot];
+
+      var marked = this.props.marked || {};
+      if (marked && marked.constructor === Array && marked.length) {
+        marked = {
+          marked: true
+        };
+      }
+      var dot = void 0;
+      if (marked.marked) {
+        dotStyle.push(this.style.visibleDot);
+        dot = _react2.default.createElement(_reactNative.View, { style: dotStyle, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 57
+          }
+        });
+      } else if (!this.props.markingExists) {
+        textStyle.push(this.style.alignedText);
+      }
+
+      if (this.props.state === 'selected' || marked.selected) {
+        containerStyle.push(this.style.selected);
+        dotStyle.push(this.style.selectedDot);
+        textStyle.push(this.style.selectedText);
+      } else if (this.props.state === 'disabled' || marked.disabled) {
+        textStyle.push(this.style.disabledText);
+      } else if (this.props.state === 'today') {
+        textStyle.push(this.style.todayText);
+      }
+      return _react2.default.createElement(
+        _reactNative.TouchableOpacity,
+        { style: containerStyle, onPress: this.onDayPress, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 72
+          }
+        },
+        _react2.default.createElement(
+          _reactNative.Text,
+          { style: textStyle, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          },
+          String(this.props.children)
+        ),
+        dot
+      );
+    }
+  }]);
+  return Day;
+}(_react.Component), _class.propTypes = {
+  state: _propTypes2.default.oneOf(['selected', 'disabled', 'today', '']),
+
+  theme: _propTypes2.default.object,
+  marked: _propTypes2.default.any,
+  onPress: _propTypes2.default.func,
+  day: _propTypes2.default.object,
+  markingExists: _propTypes2.default.bool
+}, _temp);
+exports.default = Day;
