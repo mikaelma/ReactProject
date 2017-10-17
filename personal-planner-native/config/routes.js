@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import {StackNavigator, TabNavigator, TabBarBottom, TabBarTop} from 'react-navigation';
 import { Calendar, Profile, TodoList } from '../screens';
 import { FontAwesome } from '@expo/vector-icons';
+import colors from './colors';
 
 /**
  * Main navigator. Tabnavigator at the bottom with all different screens
@@ -18,10 +19,16 @@ export const MainTabs = TabNavigator({
                 screen: Calendar,
                 //Styling for the header
                 navigationOptions: {
+                    headerTitleStyle: {
+                        color: colors.white,
+                        fontSize: 30,
+                    },
                     headerStyle: {
+
+                        backgroundColor: colors.primaryColor,
                         marginTop: Platform.OS === 'android' ? 24 : 0,
                     },
-                    title: 'Kollektivet'
+                    title: 'Agenda'
                 }
             },
         }),
@@ -41,10 +48,15 @@ export const MainTabs = TabNavigator({
                 screen: TodoList,
                 //Styling for the header
                 navigationOptions: {
+                    headerTitleStyle: {
+                        color: colors.white,
+                        fontSize: 30,
+                    },
                     headerStyle: {
+                        backgroundColor: colors.primaryColor,
                         marginTop: Platform.OS === 'android' ? 24 : 0,
                     },
-                    title: 'Todoliste'
+                    title: 'Todo'
                 }
             }
         }),
@@ -64,7 +76,12 @@ export const MainTabs = TabNavigator({
                 screen: Profile,
                 //Styling for the header
                 navigationOptions: {
+                    headerTitleStyle: {
+                        color: colors.white,
+                        fontSize: 30,
+                    },
                     headerStyle: {
+                        backgroundColor: colors.primaryColor,
                         marginTop: Platform.OS === 'android' ? 24 : 0,
                     },
                     title: 'Profil'
@@ -87,6 +104,10 @@ export const MainTabs = TabNavigator({
     animationEnabled: true,
     lazy: false,
     tabBarOptions: {
-        activeTintColor: 'black',
+        style:{
+            backgroundColor: colors.white,
+        },
+        activeTintColor: colors.primaryColor,
+        inactiveTingColor: colors.idleColor,
     },
 });
