@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ScrollView, TextInput } from 'react-native';
-import { FormLabel, FormInput, CheckBox, List } from 'react-native-elements';
+import { View, Text,  ScrollView, AsyncStorage } from 'react-native';
+import { FormInput, CheckBox, List } from 'react-native-elements';
 import colors from '../config/colors';
 
 class TodoList extends Component{
@@ -9,20 +9,28 @@ class TodoList extends Component{
 
         this.state = {
             text: '',
-            elements: [
-                {title: 'Kjøpe mange meloner', checked: false},
-                {title: 'Kjøpe mange meloner', checked: false},
-                ]
+            elements: [],
         };
     }
 
     async componentWillMount(){
-        const elements = await AsyncStorage.getItem("elements");
-        if (elements){
-            console.log("VI HAR DATA");
-            this.setState({ elements })
-        }else{
-            console.log("Ingen data lagret...");
+        try{
+            const elements = await AsyncStorage.getItem('elements');
+            if(elements){
+                this.setState({
+                    elements:JSON.parse(elements)
+                });
+            }
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    async componentDidUpdate(){
+        try{
+            await AsyncStorage.setItem('elements',JSON.stringify(this.state.elements));
+        } catch (error){
+            console.log(error);
         }
     }
 
@@ -31,16 +39,23 @@ class TodoList extends Component{
         elements[index].checked = !elements[index].checked;
         this.setState({
             elements
-        })
+        });
 
     }
 
     handleText = () => {
-        console.log("VI SKREV: " + this.state.text)
         this.setState({
             elements: [...this.state.elements, {title: this.state.text, checked: false}],
             text: '',
         })
+    }
+
+    deleteElement = (index) => {
+        let elements = this.state.elements;
+        elements.splice(index, 1);
+        this.setState({
+            elements
+        });
     }
 
     render(){
@@ -54,7 +69,6 @@ class TodoList extends Component{
                     <FormInput placeholder="Add new todo" placeholderTextColor={colors.secondaryColor} inputStyle={{color: colors.textColor, textAlign:"center"}} value={this.state.text} onChangeText={(text) => self.setState({text})}
                                onSubmitEditing={ () => self.handleText(this)}/>
 
-
                 </View>
 
                 <ScrollView style={{height: '85%', width:'100%'}}>
@@ -67,7 +81,10 @@ class TodoList extends Component{
                                     checked={element.checked}
                                     uncheckedColor={'#C84630'}
                                     checkedColor={'#5FDD9D'}
-                                    onPress={() => self.handleCheck(index)}/>
+                                    onPress={() => self.handleCheck(index)}
+                                    onIconPress={() => self.handleCheck(index)}
+                                    onLongPress={() => self.deleteElement(index)}
+                                    onLongIconPress={() => self.deleteElement(index)}/>
                             ))
                         }
                     </List>
