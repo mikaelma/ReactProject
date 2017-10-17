@@ -31,8 +31,10 @@ async componentWillMount(){
       elements[index].checked = !elements[index].checked;
       this.setState({
           elements: elements,
+      }, () => {
+          window.localStorage.setItem('todo_elements',JSON.stringify(this.state.elements));
       })
-  }
+  };
 
   handleFieldKeyDown = (e) => {
       switch (e.key){
