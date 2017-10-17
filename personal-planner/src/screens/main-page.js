@@ -25,6 +25,7 @@ class MainPage extends Component {
             dateErrorText: '',
             startTimeErrorText: '',
             endTimeErrorText: '',
+            name: ''
         };
 
         //Listener for window size
@@ -44,10 +45,8 @@ class MainPage extends Component {
                 e.start = moment(e.start).toDate();
                 e.end = moment(e.end).toDate();
             });
-            return this.setState({ events })
-
+            this.setState({ events })
         }
-        this.setState({ events: [] })
     }
 
     /**
