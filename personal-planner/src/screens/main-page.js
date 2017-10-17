@@ -39,6 +39,7 @@ class MainPage extends Component {
      */
     async componentWillMount(){
         let events = await JSON.parse(localStorage.getItem("events"));
+        let userInformation = await JSON.parse(localStorage.getItem("info"));
         if (events){
             //Converts date strings to date object
             events.map((e) => {
@@ -47,6 +48,9 @@ class MainPage extends Component {
             });
             this.setState({ events })
         }
+        userInformation ?
+            this.setState({ name: userInformation.firstnameField + ' ' + userInformation.surnameField}) :
+            this.setState({ name: '' });
     }
 
     /**
@@ -116,7 +120,7 @@ class MainPage extends Component {
         //If everything is filled correctly
         } else {
             this.setState({
-                events: [...this.state.events, {'title': this.state.value,
+                events: [...this.state.events, {'title': this.state.name ? `${this.state.value} - ${this.state.name}` : this.state.value,
                     'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
                     'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
             }, () => {
