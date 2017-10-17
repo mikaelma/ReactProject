@@ -21,7 +21,8 @@ class MainPage extends Component {
             events: [],
             dateErrorText: '',
             startTimeErrorText: '',
-            endTimeErrorText: ''
+            endTimeErrorText: '',
+            todoElements: [],
         };
 
         //Listener for window size
@@ -124,17 +125,34 @@ class MainPage extends Component {
         }
     };
 
+    /**
+     * Stores the elements in the todolist. Checks for unrealistic long inputs...
+     * @returns {Promise.<void>}
+    saveTodo = (e) => {
+        this.setState({
+            todoElements: [...this.state.todoElements, {title: r}]
+            events: [...this.state.events, {'title': this.state.value,
+                'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
+                'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
+            }, () => {
+                localStorage.setItem("events", JSON.stringify(this.state.events));
+                this.handleClose();
+            });
+        }
+    };
+
+     */
     render() {
         return (
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
                     <MainContainer>
+                        <TodoList />
+                    </MainContainer>
+                    <MainContainer>
                         <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>
-                    </MainContainer>
-                    <MainContainer>
-                        <TodoList/>
                     </MainContainer>
 
                 </div>
