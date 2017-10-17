@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
 import { DateForm, TimePickerForm } from '../components/form';
 import MainContainer from '../components/containers/main-container';
+import ToDoContainer from '../components/containers/todo-container';
+import CalendarContainer from '../components/containers/calendar-container';
 import Calendar from '../components/calendar/calendar';
 import moment from 'moment';
 import 'moment/locale/nb';
 import TodoList from '../components/lists/todo-list';
+
 
 class MainPage extends Component {
     constructor(props) {
@@ -22,7 +25,6 @@ class MainPage extends Component {
             dateErrorText: '',
             startTimeErrorText: '',
             endTimeErrorText: '',
-            todoElements: [],
         };
 
         //Listener for window size
@@ -125,35 +127,18 @@ class MainPage extends Component {
         }
     };
 
-    /**
-     * Stores the elements in the todolist. Checks for unrealistic long inputs...
-     * @returns {Promise.<void>}
-    saveTodo = (e) => {
-        this.setState({
-            todoElements: [...this.state.todoElements, {title: r}]
-            events: [...this.state.events, {'title': this.state.value,
-                'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
-                'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
-            }, () => {
-                localStorage.setItem("events", JSON.stringify(this.state.events));
-                this.handleClose();
-            });
-        }
-    };
-
-     */
-    render() {
+    render(){
         return (
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
-                    <MainContainer>
+                    <ToDoContainer>
                         <TodoList />
-                    </MainContainer>
-                    <MainContainer>
+                    </ToDoContainer>
+                    <CalendarContainer>
                         <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>
-                    </MainContainer>
+                    </CalendarContainer>
 
                 </div>
                 <Dialog
@@ -221,7 +206,8 @@ const style = {
     mainStyle: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
+        padding: 20,
     },
     dropDownMenuStyle: {
         marginLeft: -23,

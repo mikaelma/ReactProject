@@ -9,15 +9,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render((
-    <MuiThemeProvider>
+
+ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Route path='/' component={App} />
-                <Route path = {'/Profile'} component = {ProfilePage} />
-                <Route path = {'/Notes'} component = {NotePage} />
             </div>
-        </BrowserRouter>
-    </MuiThemeProvider>),
+        </BrowserRouter>,
     document.getElementById('root'));
 registerServiceWorker();

@@ -22,6 +22,7 @@ async componentWillMount(){
             elements:JSON.parse(elements)
         });
     }
+
   }
 
   handleCheck = (e, index) => {
@@ -88,7 +89,6 @@ const style = {
     containerStyle: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'lightblue',
         width: '100%',
         height: '100%',
       },
