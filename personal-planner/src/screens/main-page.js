@@ -105,7 +105,7 @@ class MainPage extends Component {
      * @returns {Promise.<void>}
      */
     saveBooking = () => {
-        const { date, startTime, endTime } = this.state;
+        const { date, startTime, endTime, events, name, value } = this.state;
         //If no information in the form elements
         if (!date || !startTime || !endTime){
             //Adds text to the errortext states
@@ -120,7 +120,7 @@ class MainPage extends Component {
         //If everything is filled correctly
         } else {
             this.setState({
-                events: [...this.state.events, {'title': this.state.name ? `${this.state.value} - ${this.state.name}` : this.state.value,
+                events: [...this.state.events, {'title': name ? `${value} - ${name}` : value,
                     'start': new Date(date.getFullYear(), date.getMonth(), date.getDate(), startTime.getHours(), startTime.getMinutes()),
                     'end': new Date(date.getFullYear(), date.getMonth(), date.getDate(), endTime.getHours(), startTime.getMinutes())}],
             }, () => {
