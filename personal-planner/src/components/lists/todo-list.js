@@ -7,6 +7,7 @@ class TodoList extends Component{
   constructor(props) {
     super(props);
 
+
     this.state = {
         fieldValue: '',
         elements: [{title: 'Gaa paa do', checked: true},
@@ -14,7 +15,6 @@ class TodoList extends Component{
             {title: 'Lufte hamster', checked: false},
             {title: 'Rydde etter fest', checked: false}],
       };
-
   }
 
   handleCheck = (e, index) => {
@@ -74,10 +74,8 @@ const style = {
     containerStyle: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'lightblue',
         width: '100%',
         height: '100%',
-        paddingLeft: 20,
       },
   }
 

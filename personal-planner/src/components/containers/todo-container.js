@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MainContainer = (props) => {
+const ToDoContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
             {props.children}
@@ -11,7 +11,7 @@ const MainContainer = (props) => {
 const styles = {
     containerStyle: {
         display: 'flex',
-        height: '90vh',
+        height: '80vh',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'flex-start',
@@ -19,4 +19,4 @@ const styles = {
     },
 }
 
-export default MainContainer;
+export default ToDoContainer;
