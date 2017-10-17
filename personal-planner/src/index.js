@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import ProfilePage from './screens/profile-page';
-import NotePage  from './screens/note-page';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
