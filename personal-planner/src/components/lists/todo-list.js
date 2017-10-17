@@ -7,11 +7,14 @@ class TodoList extends Component{
   constructor(props) {
     super(props);
 
+
     this.state = {
         fieldValue: '',
-        elements: [{title: 'Gaa paa do', checked: true}, {title: 'Vaske kjøkken', checked: false}, {title: 'Lufte hamster', checked: false}, {title: 'Rydde etter fest', checked: false}],
+        elements: [{title: 'Gaa paa do', checked: true},
+            {title: 'Vaske kjøkken', checked: false},
+            {title: 'Lufte hamster', checked: false},
+            {title: 'Rydde etter fest', checked: false}],
       };
-
   }
 
   handleCheck = (e, index) => {
@@ -26,13 +29,10 @@ class TodoList extends Component{
   handleFieldKeyDown = (e) => {
       switch (e.key){
           case 'Enter':
-              console.log(e.target.value);
-              let elements = this.state.elements;
-              elements.push({title: e.target.value, checked: false});
               this.setState({
-                  elements: elements,
-                  fieldValue: '',
-              })
+                    elements: [...this.state.elements, {title: e.target.value, checked: false}],
+                    fieldValue: '',
+              });
               break;
       }
   }
@@ -51,6 +51,7 @@ class TodoList extends Component{
             <TextField
                 onKeyDown={ (e) => this.handleFieldKeyDown(e)}
                 defaultValue=""
+                //maxLength="24"
                 value={this.state.fieldValue}
                 onChange={(e) => this.handleFieldChange(e)}
                 floatingLabelText="Legg til nytt element"
@@ -64,7 +65,6 @@ class TodoList extends Component{
                 onCheck={ (e) => self.handleCheck(e, index)}
                 />
             })}
-
         </div>
     );
   }
@@ -74,7 +74,6 @@ const style = {
     containerStyle: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'red',
         width: '100%',
         height: '100%',
       },

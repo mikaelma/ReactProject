@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "jscs": "^3.0.7",
-    "material-ui": "^0.19.4",
+    "material-ui": "^0.19.3",
     "moment": "^2.19.1",
     "react": "^16.0.0",
     "react-big-calendar": "^0.16.1",

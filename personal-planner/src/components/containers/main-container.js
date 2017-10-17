@@ -11,8 +11,8 @@ const MainContainer = (props) => {
 const styles = {
     containerStyle: {
         display: 'flex',
-        flex: 1,
         height: '90vh',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'flex-start',
         flexDirection: 'column'
