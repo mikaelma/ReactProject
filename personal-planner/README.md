@@ -31,7 +31,7 @@ if you get errors:
 
 # Code Examle
 
-All __screens__ in the project can be found in the [screens folder](./src/sreens/). 
+All __screens__ in the project can be found in the [screens folder](./src/screens/). 
 
 Screens will hold and render different __components__, found in [components folder](./src/components/).
 
