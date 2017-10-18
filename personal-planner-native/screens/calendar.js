@@ -36,7 +36,7 @@ class Calendar extends Component{
                     }}
                 />
                 <ActionButton
-                    onPress={() => this.props.navigation.navigate('BookingForm')}
+                    onPress={() => this.props.navigation.navigate('AddNoteView')}
                     buttonColor={colors.primaryColor}
                     icon={(<FontAwesome name="plus" color="white" size={24}/>)}
                 />
