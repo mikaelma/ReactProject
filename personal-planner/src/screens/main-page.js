@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
 import { DateForm, TimePickerForm } from '../components/form';
-import MainContainer from '../components/containers/main-container';
 import ToDoContainer from '../components/containers/todo-container';
 import CalendarContainer from '../components/containers/calendar-container';
 import Calendar from '../components/calendar/calendar';
@@ -45,6 +44,7 @@ class MainPage extends Component {
             events.map((e) => {
                 e.start = moment(e.start).toDate();
                 e.end = moment(e.end).toDate();
+                return null;
             });
             this.setState({ events })
         }
@@ -105,7 +105,7 @@ class MainPage extends Component {
      * @returns {Promise.<void>}
      */
     saveBooking = () => {
-        const { date, startTime, endTime, events, name, value } = this.state;
+        const { date, startTime, endTime, name, value } = this.state;
         //If no information in the form elements
         if (!date || !startTime || !endTime){
             //Adds text to the errortext states
@@ -135,9 +135,11 @@ class MainPage extends Component {
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
                     <ToDoContainer>
+                        <h1>Todo</h1>
                         <TodoList />
                     </ToDoContainer>
                     <CalendarContainer>
+                        <h1>Reservasjoner</h1>
                         <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>

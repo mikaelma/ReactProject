@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Container for the todolist
-const ToDoContainer = (props) => {
+const NotesContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
             {props.children}
@@ -22,4 +22,4 @@ const styles = {
 }
 
 //Export the container so its avaiable outside the script
-export default ToDoContainer;
+export default NotesContainer;

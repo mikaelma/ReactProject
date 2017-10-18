@@ -200,6 +200,8 @@ class ProfilePage extends Component {
     }
 }
 
+
+// Styles for the component.
 const style = {
     mainStyle: {
         display: 'flex',

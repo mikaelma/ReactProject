@@ -10,6 +10,7 @@ class NoteForm extends Component{
         }
     }
 
+    //Handling events
     handleOpen = () => {
         this.setState({ open: true });
     };
