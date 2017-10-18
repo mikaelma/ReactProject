@@ -67,7 +67,7 @@ class TodoList extends Component{
                 <View style={{height: '15%', justifyContent: 'center'}}>
 
                     <FormInput placeholder="Add new todo" placeholderTextColor={colors.secondaryColor} inputStyle={{color: colors.textColor, textAlign:"center"}} value={this.state.text} onChangeText={(text) => self.setState({text})}
-                               onSubmitEditing={ () => self.handleText(this)}/>
+                               onSubmitEditing={ () => self.handleText(this)} underlineColorAndroid={colors.secondaryColor}/>
 
                 </View>
 
