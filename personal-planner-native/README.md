@@ -16,7 +16,7 @@ To run the project do the following:
 
     sudo sysctl ......
 
-![Image of error](https://imgur.com/a/ISUyy)
+![Image of error](https://imgur.com/cH3QiVe)
 
 For testing purposes we recommend using the app [__Expo__](https://expo.io).
 
