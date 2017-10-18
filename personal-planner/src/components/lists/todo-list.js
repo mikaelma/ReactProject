@@ -117,15 +117,22 @@ class TodoList extends Component {
                         onChange={(e) => this.handleFieldChange(e)}
                         floatingLabelText="Legg til nytt element"
                     />
-
-                    {/*Creating all the checkboxes*/}
-                    {this.state.elements.map(function (element, index) {
-                        return <Checkbox
-                            label={element.title}
-                            checked={element.checked}
-                            key={index}
-                            onCheck={(e) => self.handleCheck(e, index)}
-                        />
+                })}
+            </div>
+            <div style={style.notesStyle}>
+                <NoteForm submit={this.addNote}/>
+                <div style={style.scroll}>
+                    {this.state.notes.map((note,index)=>{
+                        return(
+                            <Card style={style.postIt}>
+                            <CardHeader
+                                title={note.title}
+                            />
+                            <CardText>{note.text}</CardText>
+                            <CardActions>
+                            <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
+                            </CardActions>
+                        </Card>)
                     })}
                 </div>
                 <div style={style.notesStyle}>
@@ -158,6 +165,7 @@ const style = {
         width: '100%',
         height: '100%',
     },
+<<<<<<< HEAD
     listStyle: {
         display: 'flex',
         flexDirection: 'column',
@@ -177,6 +185,22 @@ const style = {
     scroll: {
         maxHeight: '91%',
         overflowY: 'scroll'
+=======
+    notesStyle:{
+        display:'flex',
+        flexDirection:'column',
+        width:'50%',
+        height:'100%',
+    },
+    postIt:{
+        backgroundColor:"#FFEB3B",
+        marginTop:10,
+    },
+    scroll:{
+        maxHeight:'91%',
+        overflowY:'scroll',
+        flexDirection:'column',
+>>>>>>> 5c64d79a5fe196f20c102fd52148805786814a5c
     }
 }
 

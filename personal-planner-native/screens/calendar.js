@@ -80,8 +80,6 @@ class Calendar extends Component{
 
     timeToString(time) {
         const date = new Date(time);
-        console.log(date);
-        console.log(date.toISOString().split('T')[0])
         return date.toISOString().split('T')[0];
     }
 }

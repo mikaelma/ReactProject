@@ -140,9 +140,9 @@ class MainPage extends Component {
                     </ToDoContainer>
                     <CalendarContainer>
                         <h1>Reservasjoner</h1>
-                        <Calendar events={this.state.events}/>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>
+                        <Calendar events={this.state.events}/>
                     </CalendarContainer>
 
                 </div>
