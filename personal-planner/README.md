@@ -42,28 +42,26 @@ the [Notes](./src/components/form/note-form.js),
 and the [Calendar](./src/components/calendar/calendar.js)
 
 The main page is created with flex-containers to place the components:
+    render(){
+            return (
+                <div style={style.mainStyle}>
+                    <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
+                        <ToDoContainer>
+                            <TodoList />
+                        </ToDoContainer>
+                        <CalendarContainer>
+                            <Calendar events={this.state.events}/>
+                            <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
+                                        onClick={() => this.setState({open: true})}/>
+                        </CalendarContainer>
 
-'''javascript
-render(){
-        return (
-            <div style={style.mainStyle}>
-                <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
-                    <ToDoContainer>
-                        <TodoList />
-                    </ToDoContainer>
-                    <CalendarContainer>
-                        <Calendar events={this.state.events}/>
-                        <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
-                                      onClick={() => this.setState({open: true})}/>
-                    </CalendarContainer>
+                    </div>
+                    ..............
 
-                </div>
-                ..............
-'''
 
 It also handles collecting data for the calendar from local storage and mapping them to the calendar component: 
 
-'''javascript
+
 async componentWillMount(){
         let events = await JSON.parse(localStorage.getItem("events"));
         let userInformation = await JSON.parse(localStorage.getItem("info"));
@@ -79,7 +77,7 @@ async componentWillMount(){
             this.setState({ name: userInformation.firstnameField + ' ' + userInformation.surnameField}) :
             this.setState({ name: '' });
     }
-'''
+
 
 The same goes for saving to local storage:
 '''javascript
