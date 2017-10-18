@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 
 
 class TodoList extends Component {
@@ -15,17 +16,19 @@ class TodoList extends Component {
 
     //Gathering elements from local storage and putting them in state.
     async componentWillMount() {
-        let elements = await window.localStorage.getItem('todo_elements');
-
-        if (elements) {
-            console.log(elements);
-            this.setState({
-                elements: JSON.parse(elements)
-            });
-        } else {
-            this.setState({
-                elements: []
-            });
+        try{
+            let elements = await window.localStorage.getItem('todo_elements');
+            if (elements) {
+                this.setState({
+                    elements: JSON.parse(elements)
+                });
+            } else {
+                this.setState({
+                    elements: []
+                });
+            }
+        }catch (error){
+            console.log(error);
         }
     }
 
@@ -45,7 +48,7 @@ class TodoList extends Component {
     handleFieldKeyDown = (e) => {
         switch (e.key) {
             case 'Enter':
-                let elements = this.state.elements
+                let elements = this.state.elements;
                 let obj = {
                     title: e.target.value,
                     checked: false
@@ -54,8 +57,9 @@ class TodoList extends Component {
                 this.setState({
                     elements: elements,
                     fieldValue: '',
-                });
-                window.localStorage.setItem('todo_elements', JSON.stringify(this.state.elements));
+                }, () => {
+                    window.localStorage.setItem('todo_elements', JSON.stringify(this.state.elements));
+                })
                 break;
             default:
                 break;
@@ -66,6 +70,21 @@ class TodoList extends Component {
     handleFieldChange = (e) => {
         this.setState({
             fieldValue: e.target.value,
+        })
+    }
+
+    removeDone = () => {
+        let elements = this.state.elements;
+
+        for (var i = elements.length; i > 0; i = i-1){
+            if (elements[i-1].checked){
+                elements.splice(i-1, 1);
+            }
+        }
+        this.setState({
+            elements: elements,
+        }, () => {
+            window.localStorage.setItem('todo_elements', JSON.stringify(this.state.elements));
         })
     }
 
@@ -96,6 +115,9 @@ class TodoList extends Component {
                             onCheck={(e) => self.handleCheck(e, index)}
                         />
                     })}
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <IconButton onClick={() => self.removeDone()} tooltip="Fjern fullførte" iconStyle={{iconHoverColor: "#C3423F", color: "#BDBDBD"}}iconClassName="fa fa-times-circle" />
+                    </div>
                 </div>
             </div>
         );
