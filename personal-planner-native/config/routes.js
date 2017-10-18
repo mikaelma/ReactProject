@@ -137,6 +137,10 @@ export const MainTabs = TabNavigator({
                     color:colors.white,
                     fontSize:30,
                 },
+                headerTintColor: 'white',
+                headerBackTitleStyle: {
+                    fontSize: 24
+                },
                 headerStyle:{
                     backgroundColor:colors.primaryColor,
                     marginTop:Platform.OS === 'android' ? 24: 0
@@ -144,6 +148,13 @@ export const MainTabs = TabNavigator({
                 title:'Notater'
              }
          }
+     },{
+        navigationOptions: {
+            title: 'Notater',
+            tabBarIcon: ({tintColor}) => (
+                <FontAwesome name="sticky-note-o" size={26} color={tintColor}/>
+            )
+        }
      })   
     }
     }, {

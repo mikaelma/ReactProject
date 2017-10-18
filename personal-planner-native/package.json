@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^5.2.0",
     "expo": "^21.0.2",
     "moment": "^2.19.1",
     "react": "^16.0.0-alpha.12",
@@ -27,6 +28,7 @@
     "react-native-calendars": "^1.7.1",
     "react-native-datepicker": "^1.6.0",
     "react-native-elements": "^0.17.0",
+    "react-native-material-cards": "^1.0.6",
     "react-native-photo-upload": "^1.1.1",
     "react-navigation": "^1.0.0-beta.13"
   }
