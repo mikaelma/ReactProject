@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
 import { DateForm, TimePickerForm } from '../components/form';
 import ToDoContainer from '../components/containers/todo-container';
+import NotesContainer from '../components/containers/notes-container';
 import CalendarContainer from '../components/containers/calendar-container';
 import Calendar from '../components/calendar/calendar';
 import moment from 'moment';
 import 'moment/locale/nb';
 import TodoList from '../components/lists/todo-list';
-
+import NoteList from '../components/lists/note-list';
 
 class MainPage extends Component {
     constructor(props) {
@@ -138,6 +139,10 @@ class MainPage extends Component {
                         <h1>Todo</h1>
                         <TodoList />
                     </ToDoContainer>
+                    <NotesContainer>
+                        <h1>Notater</h1>
+                        <NoteList/>
+                    </NotesContainer>
                     <CalendarContainer>
                         <h1>Reservasjoner</h1>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}

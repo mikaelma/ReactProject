@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton'
-import NoteForm from '../form/note-form'
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 
 
 class TodoList extends Component {
@@ -13,15 +10,12 @@ class TodoList extends Component {
         this.state = {
             fieldValue: '',
             elements: [],
-            notes: []
         };
-
     }
 
     //Gathering elements from local storage and putting them in state.
     async componentWillMount() {
         let elements = await window.localStorage.getItem('todo_elements');
-        let notes = await window.localStorage.getItem('note_items');
 
         if (elements) {
             console.log(elements);
@@ -31,15 +25,6 @@ class TodoList extends Component {
         } else {
             this.setState({
                 elements: []
-            });
-        }
-        if (notes) {
-            this.setState({
-                notes: JSON.parse(notes)
-            })
-        } else {
-            this.setState({
-                notes: []
             });
         }
     }
@@ -84,23 +69,6 @@ class TodoList extends Component {
         })
     }
 
-    //Method for deleting a note
-    removeNote(e, index) {
-        let notes = this.state.notes;
-        notes.splice(index, 1);
-        window.localStorage.setItem('note_items', notes);
-        this.setState({ notes: notes });
-    }
-
-    //Method for adding a note
-    addNote = (note) => {
-        console.log(note);
-        let notes = this.state.notes;
-        notes.push(note);
-        window.localStorage.setItem('note_items', JSON.stringify(notes));
-        this.setState({ notes: notes })
-    }
-
     render() {
         /*We have to set self = this to use methods later on when we map elements */
         let self = this;
@@ -117,40 +85,16 @@ class TodoList extends Component {
                         onChange={(e) => this.handleFieldChange(e)}
                         floatingLabelText="Legg til nytt element"
                     />
-                })}
-            </div>
-            <div style={style.notesStyle}>
-                <NoteForm submit={this.addNote}/>
-                <div style={style.scroll}>
-                    {this.state.notes.map((note,index)=>{
-                        return(
-                            <Card style={style.postIt}>
-                            <CardHeader
-                                title={note.title}
-                            />
-                            <CardText>{note.text}</CardText>
-                            <CardActions>
-                            <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
-                            </CardActions>
-                        </Card>)
+
+                    {/*Creating all the checkboxes*/}
+                    {this.state.elements.map(function (element, index) {
+                        return <Checkbox
+                            label={element.title}
+                            checked={element.checked}
+                            key={index}
+                            onCheck={(e) => self.handleCheck(e, index)}
+                        />
                     })}
-                </div>
-                <div style={style.notesStyle}>
-                    <NoteForm submit={this.addNote} />
-                    <div style={style.scroll}>
-                        {this.state.notes.map((note, index) => {
-                            return (
-                                <Card style={style.postIt}>
-                                    <CardHeader
-                                        title={note.title}
-                                    />
-                                    <CardText>{note.text}</CardText>
-                                    <CardActions>
-                                        <IconButton iconClassName="fa fa-times" onClick={(e) => self.removeNote(e, index)} />
-                                    </CardActions>
-                                </Card>)
-                        })}
-                    </div>
                 </div>
             </div>
         );
@@ -165,43 +109,12 @@ const style = {
         width: '100%',
         height: '100%',
     },
-<<<<<<< HEAD
     listStyle: {
         display: 'flex',
         flexDirection: 'column',
         width: '50%',
         height: '100%',
     },
-    notesStyle: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '50%',
-        height: '100%'
-    },
-    postIt: {
-        backgroundColor: "#FFEB3B",
-        marginTop: 10
-    },
-    scroll: {
-        maxHeight: '91%',
-        overflowY: 'scroll'
-=======
-    notesStyle:{
-        display:'flex',
-        flexDirection:'column',
-        width:'50%',
-        height:'100%',
-    },
-    postIt:{
-        backgroundColor:"#FFEB3B",
-        marginTop:10,
-    },
-    scroll:{
-        maxHeight:'91%',
-        overflowY:'scroll',
-        flexDirection:'column',
->>>>>>> 5c64d79a5fe196f20c102fd52148805786814a5c
-    }
 }
 
 export default TodoList;
