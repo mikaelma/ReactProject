@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, AsyncStorage, ScrollView, TextInput} from 'react-native';
+import {View, Text, AsyncStorage, ScrollView, TextInput, Keyboard} from 'react-native';
 import {Avatar, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
 import colors from '../config/colors.js';
 
@@ -22,6 +22,7 @@ class Profile extends Component {
 
     //Gathering the input values from AsyncStorage.
     async componentWillMount() {
+        Keyboard.dismiss();
         try {
             const userInformation = await AsyncStorage.getItem('info');//
 
@@ -157,7 +158,6 @@ class Profile extends Component {
                                            firstnameErrorText: ''
                                         })}
                                         underlineColorAndroid={colors.secondaryColor}
-                                        autoFocus={true}
                             />
                             <FormValidationMessage>{firstnameErrorText}</FormValidationMessage>
                         </View>
@@ -171,7 +171,6 @@ class Profile extends Component {
                                            surnameErrorText: ''
                                         })}
                                         underlineColorAndroid={colors.secondaryColor}
-                                        autoFocus={true}
                             />
                             <FormValidationMessage>{surnameErrorText}</FormValidationMessage>
                         </View>
@@ -182,7 +181,6 @@ class Profile extends Component {
                                         value={this.state.emailField}
                                         onChangeText={(text) => this.setState({emailField: text, emailErrorText: ''})}
                                         underlineColorAndroid={colors.secondaryColor}
-                                        autoFocus={true}
                             />
                             <FormValidationMessage>{emailErrorText}</FormValidationMessage>
                         </View>
@@ -202,14 +200,14 @@ class Profile extends Component {
                         </View>
 
                         <Button
-                            style={styles.buttonStyle}
+                            buttonStyle={styles.buttonStyle}
                             textStyle={{fontWeight: 'bold'}}
                             containerViewStyle={styles.buttonContainerStyle}
                             backgroundColor='white'
                             color="black"
-                            raised={true}
                             title={"Lagre"}
                             onPress={() => this.handleClick()}
+                            borderRadius={5}
                         />
                 </ScrollView>
             )
