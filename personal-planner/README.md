@@ -62,32 +62,31 @@ The main page is created with flex-containers to place the components:
 
 It also handles collecting data for the calendar from local storage and mapping them to the calendar component: 
 
-
-async componentWillMount(){
-        let events = await JSON.parse(localStorage.getItem("events"));
-        let userInformation = await JSON.parse(localStorage.getItem("info"));
-        if (events){
-            //Converts date strings to date object
-            events.map((e) => {
-                e.start = moment(e.start).toDate();
-                e.end = moment(e.end).toDate();
-            });
-            this.setState({ events })
+    async componentWillMount(){
+            let events = await JSON.parse(localStorage.getItem("events"));
+            let userInformation = await JSON.parse(localStorage.getItem("info"));
+            if (events){
+                //Converts date strings to date object
+                events.map((e) => {
+                    e.start = moment(e.start).toDate();
+                    e.end = moment(e.end).toDate();
+                });
+                this.setState({ events })
+            }
+            userInformation ?
+                this.setState({ name: userInformation.firstnameField + ' ' + userInformation.surnameField}) :
+                this.setState({ name: '' });
         }
-        userInformation ?
-            this.setState({ name: userInformation.firstnameField + ' ' + userInformation.surnameField}) :
-            this.setState({ name: '' });
-    }
 
 
 The same goes for saving to local storage:
-'''javascript
-saveBooking = () => {
-        const { date, startTime, endTime, events, name, value } = this.state;
-        //If no information in the form elements
-        if (!date || !startTime || !endTime){
-        ..................
-'''
+
+    saveBooking = () => {
+            const { date, startTime, endTime, events, name, value } = this.state;
+            //If no information in the form elements
+            if (!date || !startTime || !endTime){
+            ..................
+
 
 
 # Styling
@@ -96,39 +95,39 @@ For styling this project we have mainly used the theme
 included in [Material UI](http://www.material-ui.com/#/).
 
 Since this has included most of the visual styling we need, the remaing need for .CSS has been covered by direct styling in the script:
-'''javascript
-<div style={style.containerStyle}>
 
-const style = {
-    containerStyle: {
-        display: 'flex',
-        flexDirection: 'column',
+    <div style={style.containerStyle}>
 
-        width: '100%',
-        height: '100%',
-      },
-  }
-'''
+    const style = {
+        containerStyle: {
+            display: 'flex',
+            flexDirection: 'column',
+
+            width: '100%',
+            height: '100%',
+        },
+    }
+
 
 We did this to avoid having a .css file for every component and screen, and also this is a perfectly ok way to do it with React, and it makes porting to React native much easier.
 
 # Packages used
 
-'''json
-"dependencies": {
-    "jscs": "^3.0.7",
-    "material-ui": "^0.19.3",
-    "moment": "2.19.1",
-    "react": "^16.0.0",
-    "react-big-calendar": "^0.16.1",
-    "react-dom": "^16.0.0",
-    "react-image": "^1.0.1",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14",
-    "react-validation": "^3.0.6"
-  }
-'''
+
+    "dependencies": {
+        "jscs": "^3.0.7",
+        "material-ui": "^0.19.3",
+        "moment": "2.19.1",
+        "react": "^16.0.0",
+        "react-big-calendar": "^0.16.1",
+        "react-dom": "^16.0.0",
+        "react-image": "^1.0.1",
+        "react-router": "^4.2.0",
+        "react-router-dom": "^4.2.2",
+        "react-scripts": "1.0.14",
+        "react-validation": "^3.0.6"
+    }
+
 - jscs: is a standard library used for styling the code, we did not use this much however.
 - maetrial-ui: is a library containing a lot of great components, fully functional and styled. It is also used for themeing the page.
 - moment: Usaful library for formatting date-objects, used in calendar.
