@@ -23,7 +23,7 @@ class ProfilePage extends Component {
         mq.addListener(this.WidthChange);
     }
 
-    //Storing the input values in localStorage.
+    //Gathering the input values in localStorage.
     async componentWillMount() {
         let userInformation = await JSON.parse(localStorage.getItem("info"));
         if (userInformation) {
@@ -82,7 +82,7 @@ class ProfilePage extends Component {
     };
 
 
-    /*  Function for handling the two instances of the profile page. I
+    /*  Function for handling the two instances of the profile page.
         If there is information in localStorage, then render a page with the information.
         Else go directly to the input-page.
     */
