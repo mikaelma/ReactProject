@@ -78,7 +78,6 @@ It also handles collecting data for the calendar from local storage and mapping 
                 this.setState({ name: '' });
         }
 
-
 The same goes for saving to local storage:
 
     saveBooking = () => {
@@ -87,7 +86,7 @@ The same goes for saving to local storage:
             if (!date || !startTime || !endTime){
             ..................
 
-
+Other components to this within them self.
 
 # Styling
 
@@ -111,6 +110,8 @@ Since this has included most of the visual styling we need, the remaing need for
 
 We did this to avoid having a .css file for every component and screen, and also this is a perfectly ok way to do it with React, and it makes porting to React native much easier.
 
+To customize the [Material UI](http://www.material-ui.com/#/) theme we used a [tutorial](http://www.material-ui.com/#/customization/themes). What we did was change the color palette to make it our own.
+
 # Packages used
 
 
@@ -132,3 +133,10 @@ We did this to avoid having a .css file for every component and screen, and also
 - maetrial-ui: is a library containing a lot of great components, fully functional and styled. It is also used for themeing the page.
 - moment: Usaful library for formatting date-objects, used in calendar.
 - react-big-calendar: The calendar we use.
+
+# Creators
+
+Hans Brenna
+Sondre Løvhaug
+Matz Leander Wiik
+Mikael Mathisen
