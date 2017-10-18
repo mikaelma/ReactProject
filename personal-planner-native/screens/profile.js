@@ -6,7 +6,7 @@ import colors from '../config/colors.js'
 
 class Profile extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isInfoInStorage: false,
             firstnameField: '',
@@ -115,16 +115,16 @@ class Profile extends Component {
                         source={{uri: "http://www.qygjxz.com/data/out/190/5691490-profile-pictures.png"}}
                     />
 
-                    <Text style={{marginTop: 80}}>Navn:</Text>
+                    <Text style={{marginTop: 80, fontWeight: 'bold'}}>Navn:</Text>
                     <View>
                         <Text>{firstnameField + " " + surnameField}</Text>
                     </View>
 
-                    <Text style={{marginTop: 20}}>Epost:</Text>
+                    <Text style={{marginTop: 20, fontWeight: 'bold'}}>Epost:</Text>
                     <View>
                         <Text>{emailField}</Text>
                     </View>
-                    <Text style={{marginTop: 20}}>Telefon-nummer:</Text>
+                    <Text style={{marginTop: 20, fontWeight: 'bold'}}>Telefon-nummer:</Text>
 
                     <View>
                         <Text>{telephoneField}</Text>
@@ -132,9 +132,12 @@ class Profile extends Component {
 
                     <Button
 
-                        backgroundColor={colors.primaryColor}
                         raised={true}
-                        style={{marginTop: 20}}
+                        style={styles.buttonStyle}
+                        textStyle={{fontWeight: 'bold'}}
+                        containerViewStyle={styles.buttonContainerStyle}
+                        backgroundColor='white'
+                        color="black"
                         title={"Rediger Informasjon"}
                         onPress={() => this.setState({isInfoInStorage: false})}
                     />
@@ -142,14 +145,12 @@ class Profile extends Component {
             );
         } else {
             return (
-                <ScrollView style={{height: '80%', width: '100%'}}
+                <ScrollView style={{height: '200%', width: '100%'}}
                             keyboardDismissMode={'on-drag'}
                 >
-
-                    <View>
                         <View style={{marginTop: 10, marginLeft:25, marginRight: 10}}>
                             <FormLabel>Fornavn</FormLabel>
-                            <TextInput  style={{marginLeft: 22, marginTop:8}}
+                            <TextInput  style={styles.textInputStyle}
                                         value={this.state.firstnameField}
                                         onChangeText={(text) => this.setState({
                                            firstnameField: text,
@@ -163,7 +164,7 @@ class Profile extends Component {
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
                             <FormLabel>Etternavn</FormLabel>
-                            <TextInput  style={{marginLeft: 22, marginTop:8}}
+                            <TextInput  style={styles.textInputStyle}
                                         value={this.state.surnameField}
                                         onChangeText={(text) => this.setState({
                                            surnameField: text,
@@ -177,7 +178,7 @@ class Profile extends Component {
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
                             <FormLabel>Email</FormLabel>
-                            <TextInput  style={{marginLeft: 22, marginTop:8}}
+                            <TextInput  style={styles.textInputStyle}
                                         value={this.state.emailField}
                                         onChangeText={(text) => this.setState({emailField: text, emailErrorText: ''})}
                                         underlineColorAndroid={colors.secondaryColor}
@@ -188,7 +189,7 @@ class Profile extends Component {
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
                             <FormLabel>Telefon-nummer</FormLabel>
-                            <TextInput  style={{marginLeft: 22, marginTop:8}}
+                            <TextInput  style={styles.textInputStyle}
                                         value={this.state.telephoneField}
                                         onChangeText={(text) => this.setState({
                                            telephoneField: text,
@@ -201,13 +202,15 @@ class Profile extends Component {
                         </View>
 
                         <Button
-                            backgroundColor={colors.primaryColor}
+                            style={styles.buttonStyle}
+                            textStyle={{fontWeight: 'bold'}}
+                            containerViewStyle={styles.buttonContainerStyle}
+                            backgroundColor='white'
+                            color="black"
                             raised={true}
-                            style={{marginTop: 10}}
                             title={"Lagre"}
                             onPress={() => this.handleClick()}
                         />
-                    </View>
                 </ScrollView>
             )
         }
@@ -216,7 +219,7 @@ class Profile extends Component {
 //This renders regardless of the information put in by the user.
     render() {
         return (
-            <View style={style.mainStyle}>
+            <View style={styles.mainStyle}>
                 <View
                     style={{
                         display: 'flex',
@@ -233,12 +236,36 @@ class Profile extends Component {
     };
 }
 
-const style = {
+const styles = {
     mainStyle: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
+    },
+
+    buttonStyle: {
+        borderWidth: 2,
+        borderColor: colors.primaryColor
+    },
+
+    buttonContainerStyle: {
+        marginLeft: 8,
+        marginRight: 8,
+        marginTop: 20,
+    },
+
+    textInputStyle:{
+        width: 300,
+        height: 50,
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        paddingLeft: 10,
+        backgroundColor: '#F0F0F0',
     }
 };
+
+
 
 export default Profile;
