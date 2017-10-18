@@ -4,6 +4,10 @@ import moment from 'moment';
 import 'moment/locale/nb';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+
+// Calendar component.
+
+//Setting the time zone
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
 );
@@ -47,6 +51,7 @@ const style = {
     },
 };
 
+//Styling all elements so they are in Norwegian
 const messages = {
     allDay: 'Kl',
     previous: '<',
@@ -61,4 +66,5 @@ const messages = {
     event: 'Hendelse',
 };
 
+//Exporting the component
 export default Calendar;

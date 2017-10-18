@@ -188,7 +188,7 @@ class ProfilePage extends Component {
                     There is no functionality for changing profile pic
                     */}
                     <Avatar
-                        style={{marginTop: 20}}
+                        style={{marginTop: 10, marginLeft: 0}}
                         src={"http://www.qygjxz.com/data/out/190/5691490-profile-pictures.png"}
                         size={150}
                     />
@@ -200,6 +200,8 @@ class ProfilePage extends Component {
     }
 }
 
+
+// Styles for the component.
 const style = {
     mainStyle: {
         display: 'flex',

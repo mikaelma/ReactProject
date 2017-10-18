@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
 import {
-    Text,
     View,
     Picker,
     Platform,
-    DatePickerAndroid
 } from 'react-native';
-import { FormLabel, FormInput } from 'react-native-elements'
+import { FormLabel, Button, FormValidationMessage } from 'react-native-elements'
 import colors from '../config/colors'
 import DatePicker from 'react-native-datepicker'
 
 class BookingForm extends Component{
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
-            value: ''
-        }
-        console.log(new Date())
+            value: '',
+            date: '',
+            startTime: '',
+            endTime: '',
+            dateErrorText: '',
+            startTimeErrorText: '',
+            endTimeErrorText: '',
+        };
     }
 
-
+    submit = () => {
+        console.log('onclick')
+        const { date, startTime, endTime } = this.state;
+        if (!date || !startTime || !endTime) {
+            //Adds text to the errortext states
+            date ? this.setState({dateErrorText: ''}) : this.setState({dateErrorText: 'Dato mangler'});
+            startTime ? this.setState({startTimeErrorText: ''}) : this.setState({startTimeErrorText: 'Start tid mangler'});
+            endTime ? this.setState({endTimeErrorText: ''}) : this.setState({endTimeErrorText: 'Slutt tid mangler'});
+        }
+    };
 
     render(){
+        console.log(this.state.startTime);
         return (
             <View style={styles.container}>
                 <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Hva vil du reservere?</FormLabel>
@@ -39,9 +52,9 @@ class BookingForm extends Component{
                     <View style={{flex: 1}}>
                         <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Dato</FormLabel>
                         <DatePicker
-                            date={new Date()}
+                            date={this.state.date}
                             mode="date"
-                            placeholder="select date"
+                            placeholder="Velg dato"
                             format="YYYY-MM-DD"
                             showIcon={false}
                             customStyles={{
@@ -49,8 +62,11 @@ class BookingForm extends Component{
                                     marginLeft: 8,
                                 }
                             }}
-                            onDateChange={(date) => console.log(date)}
+                            onDateChange={(date) => this.setState({ date })}
+                            confirmBtnText="Lagre"
+                            cancelBtnText="Avbryt"
                         />
+                        <FormValidationMessage>{this.state.dateErrorText}</FormValidationMessage>
                     </View>
                     <View style={{flex: 1}} />
                 </View>
@@ -58,9 +74,9 @@ class BookingForm extends Component{
                     <View style={{flex: 1}}>
                         <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Start tid</FormLabel>
                         <DatePicker
-                            date={new Date()}
+                            date={this.state.startTime}
                             mode="time"
-                            placeholder="select date"
+                            placeholder="Velg start tid"
                             format="HH-MM"
                             showIcon={false}
                             customStyles={{
@@ -68,15 +84,17 @@ class BookingForm extends Component{
                                     marginLeft: 8,
                                 }
                             }}
-                            onDateChange={(date) => console.log(date)}
+                            onDateChange={(date) => this.setState({ startTime: date })}
+                            confirmBtnText="'Lagre"
+                            cancelBtnText="Avbryt"
                         />
+                        <FormValidationMessage>{this.state.startTimeErrorText}</FormValidationMessage>
                     </View>
                     <View style={{flex: 1}}>
                         <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Start tid</FormLabel>
                         <DatePicker
-                            date={new Date()}
                             mode="time"
-                            placeholder="select date"
+                            placeholder="Velg slutt tid"
                             format="HH-MM"
                             showIcon={false}
                             customStyles={{
@@ -85,8 +103,23 @@ class BookingForm extends Component{
                                 }
                             }}
                             onDateChange={(date) => console.log(date)}
+                            confirmBtnText="Lagre"
+                            cancelBtnText="Avbryt"
                         />
+                        <FormValidationMessage>{this.state.endTimeErrorText}</FormValidationMessage>
                     </View>
+                </View>
+                <View style={{alignItems: 'stretch'}}>
+                    <Button
+                        borderRadius={5}
+                        buttonStyle={styles.buttonStyle}
+                        backgroundColor='white'
+                        containerViewStyle={styles.buttonContainerStyle}
+                        title="Lagre"
+                        color="black"
+                        textStyle={{fontWeight: 'bold'}}
+                        onPress={() => this.submit()}
+                    />
                 </View>
             </View>
         )
@@ -103,6 +136,15 @@ const styles = {
         fontSize: 14,
         marginBottom: 10,
         color: colors.textColor
+    },
+    buttonContainerStyle: {
+        marginLeft: 8,
+        marginRight: 18,
+        marginTop: 20,
+    },
+    buttonStyle: {
+        borderWidth: 2,
+        borderColor: colors.primaryColor
     }
 };
 
