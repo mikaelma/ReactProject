@@ -155,18 +155,16 @@ const style = {
         display:'flex',
         flexDirection:'column',
         width:'50%',
-        height:'100%'
+        height:'100%',
     },
     postIt:{
         backgroundColor:"#FFEB3B",
-        marginTop:10
+        marginTop:10,
     },
     scroll:{
         maxHeight:'91%',
         overflowY:'scroll',
-        display:'flex',
-        alignSelf:'flex-end',
-        flexDirection:'column'
+        flexDirection:'column',
     }
   }
 
