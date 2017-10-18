@@ -31,7 +31,7 @@ if you get errors:
 
 # Code Examle
 
-The first thing the application does is to send you to the [Main page](/src/screens/main-page.js)
+The first thing the application does is to send you to the [Main page](./src/screens/main-page.js)
 
 # Packages used
 
