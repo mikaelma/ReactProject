@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, AsyncStorage, ScrollView, TextInput} from 'react-native';
-import {Avatar, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
-import colors from '../config/colors.js'
-
+import {Avatar, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
+import colors from '../config/colors.js';
 
 class Profile extends Component {
     constructor(props) {
@@ -108,6 +107,7 @@ class Profile extends Component {
                     The avatar is just a thumbnail profile picture.
                     There is no functionality for changing profile pic
                     */}
+
                     <Avatar
                         xlarge={true}
                         rounded={true}
@@ -131,7 +131,6 @@ class Profile extends Component {
                     </View>
 
                     <Button
-
                         raised={true}
                         style={styles.buttonStyle}
                         textStyle={{fontWeight: 'bold'}}
