@@ -42,6 +42,7 @@ the [Notes](./src/components/form/note-form.js),
 and the [Calendar](./src/components/calendar/calendar.js)
 
 The main page is created with flex-containers to place the components:
+
     render(){
             return (
                 <div style={style.mainStyle}>
