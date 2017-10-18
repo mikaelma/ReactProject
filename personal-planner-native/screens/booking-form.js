@@ -7,6 +7,8 @@ import {
 import { FormLabel, Button, FormValidationMessage } from 'react-native-elements'
 import colors from '../config/colors'
 import DatePicker from 'react-native-datepicker'
+import moment from 'moment';
+import 'moment/locale/nb';
 
 class BookingForm extends Component{
     constructor(props){
@@ -23,14 +25,16 @@ class BookingForm extends Component{
         };
     }
 
-    submit = () => {
-        console.log('onclick')
-        const { date, startTime, endTime } = this.state;
+    submit = async () => {
+        const { date, startTime, endTime, value } = this.state;
         if (!date || !startTime || !endTime) {
             //Adds text to the errortext states
             date ? this.setState({dateErrorText: ''}) : this.setState({dateErrorText: 'Dato mangler'});
             startTime ? this.setState({startTimeErrorText: ''}) : this.setState({startTimeErrorText: 'Start tid mangler'});
             endTime ? this.setState({endTimeErrorText: ''}) : this.setState({endTimeErrorText: 'Slutt tid mangler'});
+        } else {
+            await this.props.navigation.state.params.onGoBack(date, startTime, endTime, value);
+            this.props.navigation.goBack();
         }
     };
 
@@ -43,7 +47,7 @@ class BookingForm extends Component{
                     mode="dialog"
                     style={{marginTop: Platform.OS === 'android' ? 0 : -40}}
                     selectedValue={this.state.language}
-                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                    onValueChange={(itemValue, itemIndex) => this.setState({value: itemValue})}>
                     <Picker.Item label="Bad" value="Bad" />
                     <Picker.Item label="Kjøkken" value="Kjøkken" />
                     <Picker.Item label="Fellesareal" value="Fellesareal" />
@@ -62,7 +66,7 @@ class BookingForm extends Component{
                                     marginLeft: 8,
                                 }
                             }}
-                            onDateChange={(date) => this.setState({ date })}
+                            onDateChange={(date) => this.setState({ date: date, dateErrorText: '' })}
                             confirmBtnText="Lagre"
                             cancelBtnText="Avbryt"
                         />
@@ -84,15 +88,16 @@ class BookingForm extends Component{
                                     marginLeft: 8,
                                 }
                             }}
-                            onDateChange={(date) => this.setState({ startTime: date })}
+                            onDateChange={(date) => this.setState({ startTime: date, startTimeErrorText: '' })}
                             confirmBtnText="'Lagre"
                             cancelBtnText="Avbryt"
                         />
                         <FormValidationMessage>{this.state.startTimeErrorText}</FormValidationMessage>
                     </View>
                     <View style={{flex: 1}}>
-                        <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Start tid</FormLabel>
+                        <FormLabel style={{marginLeft: -12}} labelStyle={styles.labelStyle}>Slutt tid</FormLabel>
                         <DatePicker
+                            date={this.state.endTime}
                             mode="time"
                             placeholder="Velg slutt tid"
                             format="HH-MM"
@@ -102,7 +107,7 @@ class BookingForm extends Component{
                                     marginLeft: 8,
                                 }
                             }}
-                            onDateChange={(date) => console.log(date)}
+                            onDateChange={(date) => this.setState({ endTime: date, endTimeErrorText: '' })}
                             confirmBtnText="Lagre"
                             cancelBtnText="Avbryt"
                         />
