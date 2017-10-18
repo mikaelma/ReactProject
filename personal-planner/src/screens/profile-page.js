@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Avatar, RaisedButton, TextField} from 'material-ui';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ProfilePage extends Component {
 
@@ -65,7 +64,11 @@ class ProfilePage extends Component {
 
         } else {
             this.setState({
-                isInfoInStorage: !this.state.isInfoInStorage
+                isInfoInStorage: !this.state.isInfoInStorage,
+                firstnameErrorText: '',
+                surnameErrorText: '',
+                emailErrorText: '',
+                telephoneErrorText: ''
             });
             const info = {
                 firstnameField: this.state.firstnameField,
@@ -98,19 +101,18 @@ class ProfilePage extends Component {
                         alignItems: 'center'
                     }}
                 >
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Navn:</strong>
+                    <div>
                         {firstnameField + " " + surnameField}
-
                     </div>
-
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Epost:</strong>
+                    <div>
                         {emailField}
                     </div>
-
-                    <div style={{marginTop: 20}}>
+                    <strong style={{marginTop: 20}}>Telefonnr:</strong>
+                    <div>
                         {telephoneField}
                     </div>
-
                     <RaisedButton
                         primary={true}
                         style={{marginTop: 20}}
@@ -133,38 +135,34 @@ class ProfilePage extends Component {
                 >
                     <TextField
                         floatingLabelText="Fornavn"
-                        onChange={(e) => this.setState({firstnameField: e.target.value})}
+                        onChange={(e) => this.setState({firstnameField: e.target.value, firstnameErrorText: ''})}
                         value={firstnameField}
                         errorText={firstnameErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Etternavn"
-                        onChange={(e) => this.setState({surnameField: e.target.value})}
+                        onChange={(e) => this.setState({surnameField: e.target.value, surnameErrorText: ''})}
                         value={surnameField}
                         errorText={surnameErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Epost"
-                        onChange={(e) => this.setState({emailField: e.target.value})}
+                        onChange={(e) => this.setState({emailField: e.target.value, emailErrorText: ''})}
                         value={emailField}
                         errorText={emailErrorText}
                     />
-
                     <TextField
                         floatingLabelText="Telefon"
-                        onChange={(e) => this.setState({telephoneField: e.target.value})}
+                        onChange={(e) => this.setState({telephoneField: e.target.value, telephoneErrorText: ''})}
                         value={telephoneField}
                         errorText={telephoneErrorText}
                     />
-
                     <RaisedButton
                         primary={true}
                         label={"Lagre"}
                         onClick={this.handleClick}
+                        style={{marginTop: 20}}
                     />
-
                 </div>
             )
         }
@@ -174,31 +172,30 @@ class ProfilePage extends Component {
     //This renders regardless of the information put in by the user.
     render() {
         return (
-            <MuiThemeProvider>
-                <div style={style.mainStyle}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flex: 1,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                            alignItems: 'center'
-                        }}>
+            <div style={style.mainStyle}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flex: 1,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        alignItems: 'center'
+                    }}>
 
-                        {/*
-                        The avatar is just a thumbnail profile picture.
-                        There is no functionality for changing profile pic
-                        */}
-                        <Avatar
-                            src={"http://www.qygjxz.com/data/out/190/5691490-profile-pictures.png"}
-                            size={150}
-                        />
+                    {/*
+                    The avatar is just a thumbnail profile picture.
+                    There is no functionality for changing profile pic
+                    */}
+                    <Avatar
+                        style={{marginTop: 20}}
+                        src={"http://www.qygjxz.com/data/out/190/5691490-profile-pictures.png"}
+                        size={150}
+                    />
 
-                        {this.renderContent()}
-                    </div>
+                    {this.renderContent()}
                 </div>
-            </MuiThemeProvider>
+            </div>
         );
     }
 }

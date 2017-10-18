@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import {StackNavigator, TabNavigator, TabBarBottom, TabBarTop} from 'react-navigation';
-import { Calendar, Profile, TodoList } from '../screens';
+import {StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import { Calendar, Profile, TodoList, BookingForm } from '../screens';
 import { FontAwesome } from '@expo/vector-icons';
 import colors from './colors';
 
@@ -24,13 +24,32 @@ export const MainTabs = TabNavigator({
                         fontSize: 30,
                     },
                     headerStyle: {
-
                         backgroundColor: colors.primaryColor,
                         marginTop: Platform.OS === 'android' ? 24 : 0,
                     },
                     title: 'Agenda'
                 }
             },
+            BookingForm: {
+                screen: BookingForm,
+                navigationOptions: {
+                    headerTitleStyle: {
+                        color: colors.white,
+                        fontSize: 30,
+                    },
+                    headerTintColor: 'white',
+                    headerBackTitleStyle: {
+                        fontSize: 24
+                    },
+                    headerStyle: {
+                        backgroundColor: colors.primaryColor,
+                        marginTop: Platform.OS === 'android' ? 24 : 0,
+                    },
+                    title: 'Reservasjon'
+                }
+            }
+        }, {
+            headerMode: 'float'
         }),
         //Styling for the chosen element in the tabnavigator
         navigationOptions: {
