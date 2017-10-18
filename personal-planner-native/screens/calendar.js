@@ -32,6 +32,7 @@ class Calendar extends Component{
     }
 
     storeAgenda = (date, startTime, endTime, value) => {
+        console.log(value);
         const day = {
             timestamp: new Date().getTime(),
             date: date,
@@ -89,7 +90,11 @@ class Calendar extends Component{
             let newItems = {};
             if (day.date){
                 newItems = {
-                    items: this.state.items[day.date].push({name: 'test'})
+                    items: this.state.items[day.date].push({
+                        room: day.room,
+                        start: day.start,
+                        end: day.end
+                    })
                 };
             }
             Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
@@ -110,7 +115,11 @@ class Calendar extends Component{
      */
     renderItem(item) {
         return (
-            <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
+            <View style={[styles.item, {height: item.height}]}>
+                <Text>
+                {`${item.room} er reservert fra ${item.start} - ${item.end}`}
+                </Text>
+            </View>
         );
     }
 

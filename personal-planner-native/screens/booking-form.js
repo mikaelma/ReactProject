@@ -15,7 +15,7 @@ class BookingForm extends Component{
         super(props);
 
         this.state = {
-            value: '',
+            value: 'Bad',
             date: '',
             startTime: '',
             endTime: '',
@@ -25,6 +25,10 @@ class BookingForm extends Component{
         };
     }
 
+    /**
+     * Validates the form input and if everything is filled it fires a method sent from calendar screen
+     * @returns {Promise.<void>}
+     */
     submit = async () => {
         const { date, startTime, endTime, value } = this.state;
         if (!date || !startTime || !endTime) {
@@ -38,6 +42,10 @@ class BookingForm extends Component{
         }
     };
 
+    /**
+     * Renders a form for inputting date and time values. You can also select which room you want to book
+     * @returns {XML}
+     */
     render(){
         console.log(this.state.startTime);
         return (
@@ -81,7 +89,7 @@ class BookingForm extends Component{
                             date={this.state.startTime}
                             mode="time"
                             placeholder="Velg start tid"
-                            format="HH-MM"
+                            format="HH:MM"
                             showIcon={false}
                             customStyles={{
                                 dateInput: {
@@ -100,7 +108,7 @@ class BookingForm extends Component{
                             date={this.state.endTime}
                             mode="time"
                             placeholder="Velg slutt tid"
-                            format="HH-MM"
+                            format="HH:MM"
                             showIcon={false}
                             customStyles={{
                                 dateInput: {
