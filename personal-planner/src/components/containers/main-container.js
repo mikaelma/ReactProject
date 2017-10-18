@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Container for the main page
 const MainContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
@@ -8,6 +9,7 @@ const MainContainer = (props) => {
     )
 };
 
+//Styles the component with flex.
 const styles = {
     containerStyle: {
         display: 'flex',
@@ -19,4 +21,5 @@ const styles = {
     },
 }
 
+//Export the container so its available outside
 export default MainContainer;

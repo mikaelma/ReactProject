@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 
 import './App.css';
 
+//Customizing the theme to use our own colors and a bigger appbar.
 const muiTheme = getMuiTheme({
     palette: {
         textColor: '#211A1E',
@@ -26,17 +27,20 @@ class App extends Component{
     render(){
         return (
             <div>
+                {/*Wrap the application in the theme*/}
                 <MuiThemeProvider muiTheme={muiTheme}>
-                    <AppBar
-                        title='Kollektivet'
-                        onTitleTouchTap={() => this.nextPath('/') }
-                        showMenuIconButton={false}
-                        iconClassNameRight="fa fa-user"
-                        onRightIconButtonTouchTap={() => this.nextPath('/Profile') }
-                        titleStyle={{fontSize: '40pt', fontFamily: 'Roboto Condensed'}}
-                    >
-                    </AppBar>
-                    <Main />
+                    <div>
+                        <AppBar
+                            title='Kollektivet'
+                            onTitleTouchTap={() => this.nextPath('/') }
+                            showMenuIconButton={false}
+                            iconClassNameRight="fa fa-user"
+                            onRightIconButtonTouchTap={() => this.nextPath('/Profile') }
+                            titleStyle={{fontSize: '40pt', fontFamily: 'Roboto Condensed'}}
+                        >
+                        </AppBar>
+                        <Main />
+                    </div>
                 </MuiThemeProvider>
             </div>
         )

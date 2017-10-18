@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Avatar, RaisedButton, TextField} from 'material-ui';
 
+
 class ProfilePage extends Component {
 
     constructor(props) {
@@ -23,7 +24,7 @@ class ProfilePage extends Component {
         mq.addListener(this.WidthChange);
     }
 
-    //Storing the input values in localStorage.
+    //Gathering the input values in localStorage.
     async componentWillMount() {
         let userInformation = await JSON.parse(localStorage.getItem("info"));
         if (userInformation) {
@@ -82,7 +83,7 @@ class ProfilePage extends Component {
     };
 
 
-    /*  Function for handling the two instances of the profile page. I
+    /*  Function for handling the two instances of the profile page.
         If there is information in localStorage, then render a page with the information.
         Else go directly to the input-page.
     */
@@ -182,13 +183,13 @@ class ProfilePage extends Component {
                         alignContent: 'center',
                         alignItems: 'center'
                     }}>
-
+                    <h1 style={style.h1}>Profil</h1>
                     {/*
                     The avatar is just a thumbnail profile picture.
                     There is no functionality for changing profile pic
                     */}
                     <Avatar
-                        style={{marginTop: 20}}
+                        style={{marginTop: 10, marginLeft: 0}}
                         src={"http://www.qygjxz.com/data/out/190/5691490-profile-pictures.png"}
                         size={150}
                     />
@@ -200,11 +201,17 @@ class ProfilePage extends Component {
     }
 }
 
+
+// Styles for the component.
 const style = {
     mainStyle: {
         display: 'flex',
         flexDirection: 'column',
         flex: 1
+    },
+    h1: {
+        fontFamily: 'Roboto',
+        fontWeight: '200',
     }
 };
 

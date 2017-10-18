@@ -1,5 +1,6 @@
 import React from 'react';
 
+//The Calendar container
 const CalendarContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
@@ -8,6 +9,7 @@ const CalendarContainer = (props) => {
     )
 };
 
+//Styles the container with flex
 const styles = {
     containerStyle: {
         display: 'flex',
@@ -19,4 +21,5 @@ const styles = {
     },
 }
 
+//Exports the container so its available outside the script
 export default CalendarContainer;
