@@ -5,41 +5,42 @@ import {
     StyleSheet
 } from 'react-native';
 import { Agenda } from 'react-native-calendars';
+import colors from '../config/colors';
+import ActionButton from 'react-native-action-button';
+import { FontAwesome } from '@expo/vector-icons';
 
 class Calendar extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
-            items: {'2012-05-22': [{text: 'item 1 - any js object'}],
-            '2012-05-23': [{text: 'item 2 - any js object'}],
-            '2012-05-24': [],
-            '2012-05-25': [{text: 'item 3 - any js object'},{text: 'any js object'}],
-        }};
+            items: {
+                '2017-10-19': [{name: 'item 1 - any js object'}]}
+        }
     }
 
     render() {
         return (
-            <Agenda
-                items={this.state.items}
-                loadItemsForMonth={this.loadItems.bind(this)}
-                selected={new Date()}
-                renderItem={this.renderItem.bind(this)}
-                renderEmptyDate={this.renderEmptyDate.bind(this)}
-                rowHasChanged={this.rowHasChanged.bind(this)}
-                //markingType={'interactive'}
-                //markedDates={{
-                //  '2017-05-08': [{textColor: '#666'}],
-                //  '2017-05-09': [{textColor: '#666'}],
-                //  '2017-05-14': [{startingDay: true, color: 'blue'}, {endingDay: true, color: 'blue'}],
-                //  '2017-05-21': [{startingDay: true, color: 'blue'}],
-                //  '2017-05-22': [{endingDay: true, color: 'gray'}],
-                //  '2017-05-24': [{startingDay: true, color: 'gray'}],
-                //  '2017-05-25': [{color: 'gray'}],
-                //  '2017-05-26': [{endingDay: true, color: 'gray'}]}}
-                // monthFormat={'yyyy'}
-                // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-                //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-            />
+            <View style={{flex:1}}>
+                <Agenda
+                    items={this.state.items}
+                    loadItemsForMonth={this.loadItems.bind(this)}
+                    selected={new Date()}
+                    renderItem={this.renderItem.bind(this)}
+                    renderEmptyDate={this.renderEmptyDate.bind(this)}
+                    rowHasChanged={this.rowHasChanged.bind(this)}
+                    theme={{
+                        selectedDayBackgroundColor: colors.secondaryColor,
+                        todayTextColor: colors.primaryColor,
+                        dotColor: colors.primaryColor,
+                        monthTextColor: colors.secondaryColor,
+                    }}
+                />
+                <ActionButton
+                    onPress={() => this.props.navigation.navigate('BookingForm')}
+                    buttonColor={colors.primaryColor}
+                    icon={(<FontAwesome name="plus" color="white" size={24}/>)}
+                />
+            </View>
         );
     }
 
@@ -50,13 +51,6 @@ class Calendar extends Component{
                 const strTime = this.timeToString(time);
                 if (!this.state.items[strTime]) {
                     this.state.items[strTime] = [];
-                    const numItems = 5;
-                    for (let j = 0; j < numItems; j++) {
-                        this.state.items[strTime].push({
-                            name: 'Item for ' + strTime,
-                            height: Math.max(50, Math.floor(Math.random() * 150))
-                        });
-                    }
                 }
             }
             //console.log(this.state.items);
@@ -66,7 +60,6 @@ class Calendar extends Component{
                 items: newItems
             });
         }, 1000);
-        // console.log(`Load Items for ${day.year}-${day.month}`);
     }
 
     renderItem(item) {
@@ -77,7 +70,7 @@ class Calendar extends Component{
 
     renderEmptyDate() {
         return (
-            <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+            <View style={styles.emptyDate}><Text>Ingen reservasjoner</Text></View>
         );
     }
 
@@ -87,6 +80,8 @@ class Calendar extends Component{
 
     timeToString(time) {
         const date = new Date(time);
+        console.log(date);
+        console.log(date.toISOString().split('T')[0])
         return date.toISOString().split('T')[0];
     }
 }
