@@ -15,16 +15,20 @@ class NoteList extends Component {
 
     //Gathering elements from local storage and putting them in state.
     async componentWillMount() {
-        let notes = await window.localStorage.getItem('note_items');
-
-        if (notes) {
-            this.setState({
-                notes: JSON.parse(notes)
-            })
-        } else {
-            this.setState({
-                notes: []
-            });
+        try{
+            let notes = await window.localStorage.getItem('note_items');
+            if (notes) {
+                console.log(notes);
+                this.setState({
+                    notes: JSON.parse(notes)
+                })
+            } else {
+                this.setState({
+                    notes: []
+                });
+            }
+        }catch (error){
+            console.log(error);
         }
     }
 
@@ -59,7 +63,7 @@ class NoteList extends Component {
                                     <CardHeader
                                         title={note.title}
                                     />
-                                    <CardText>{note.text}</CardText>
+                                    <CardText actAsExpander={true}>{note.text}</CardText>
                                     <CardActions>
                                         <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
                                     </CardActions>

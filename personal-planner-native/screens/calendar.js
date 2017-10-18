@@ -3,13 +3,16 @@ import {
     Text,
     View,
     StyleSheet,
-    AsyncStorage
+    AsyncStorage,
+    Keyboard
 } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import colors from '../config/colors';
 import ActionButton from 'react-native-action-button';
 import { FontAwesome } from '@expo/vector-icons';
 import moment from 'moment';
+
+Keyboard.dismiss();
 
 class Calendar extends Component{
     constructor(props){
@@ -28,10 +31,14 @@ class Calendar extends Component{
             .catch(error => console.log('errorGet!'));
     }
 
-    testMethod = (date, startTime, endTime, value) => {
+    storeAgenda = (date, startTime, endTime, value) => {
+        console.log(value);
         const day = {
             timestamp: new Date().getTime(),
-            date: date
+            date: date,
+            start: startTime,
+            end: endTime,
+            room: value
         };
         this.loadItems(day);
     };
@@ -58,7 +65,7 @@ class Calendar extends Component{
                     }}
                 />
                 <ActionButton
-                    onPress={() => this.props.navigation.navigate('BookingForm', {onGoBack: this.testMethod})}
+                    onPress={() => this.props.navigation.navigate('BookingForm', {onGoBack: this.storeAgenda})}
                     buttonColor={colors.primaryColor}
                     icon={(<FontAwesome name="plus" color="white" size={24}/>)}
                 />
@@ -83,7 +90,11 @@ class Calendar extends Component{
             let newItems = {};
             if (day.date){
                 newItems = {
-                    items: this.state.items[day.date].push({name: 'test'})
+                    items: this.state.items[day.date].push({
+                        room: day.room,
+                        start: day.start,
+                        end: day.end
+                    })
                 };
             }
             Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
@@ -104,7 +115,11 @@ class Calendar extends Component{
      */
     renderItem(item) {
         return (
-            <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
+            <View style={[styles.item, {height: item.height}]}>
+                <Text>
+                {`${item.room} er reservert fra ${item.start} - ${item.end}`}
+                </Text>
+            </View>
         );
     }
 

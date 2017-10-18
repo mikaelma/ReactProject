@@ -135,21 +135,20 @@ class MainPage extends Component {
         return (
             <div style={style.mainStyle}>
                 <div style={{display: 'flex', flex: 1, flexDirection: this.state.desktop ? 'row' : 'column'}}>
-                    <ToDoContainer>
-                        <h1 style={style.h1}>Todo</h1>
-                        <TodoList />
-                    </ToDoContainer>
                     <NotesContainer>
                         <h1 style={style.h1}>Notater</h1>
                         <NoteList/>
                     </NotesContainer>
+                    <ToDoContainer>
+                        <h1 style={style.h1}>Todo</h1>
+                        <TodoList />
+                    </ToDoContainer>
                     <CalendarContainer>
                         <h1 style={style.h1}>Reservasjoner</h1>
                         <RaisedButton label="Ny Reservasjon" primary={true} style={{marginTop: 10, marginLeft: 10}}
                                       onClick={() => this.setState({open: true})}/>
                         <Calendar events={this.state.events}/>
                     </CalendarContainer>
-
                 </div>
                 <Dialog
                     title="Reservasjon"

@@ -23,11 +23,15 @@ class NoteForm extends Component{
         if(!this.state.title || !this.state.text){
             this.state.title ? this.setState({titleErrorText:''}) : this.setState({titleErrorText:'Mangler tittel'}); 
             this.state.text ? this.setState({textErrorText:''}) : this.setState({textErrorText:'Mangler innhold'}); 
-            console.log("mangler noe");
             return;
         }else{
-            console.log("Legger til notat");
             this.props.submit({title:this.state.title,text:this.state.text});
+            this.setState({
+                title: "",
+                text: "",
+                titleErrorText:"",
+                textErrorText:"",
+            })
             this.handleClose();
         }   
     }
