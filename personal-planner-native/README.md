@@ -125,6 +125,9 @@ For styling this application we have mostly used direct styling on the elements 
 - react-native-datepicker: used for picking the correct date for the calendar.
 - react-native-elements: finished components used in the application
 
+# Known bugs
+- There is a bug in the application where sometimes not all icons on the nav bar will show. We have not yet figured out the cause of this.
+
 # Creators
 
 Hans Brenna
