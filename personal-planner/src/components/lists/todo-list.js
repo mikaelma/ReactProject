@@ -121,7 +121,7 @@ async componentWillMount(){
                 <div style={style.scroll}>
                     {this.state.notes.map((note,index)=>{
                         return(
-                        <Card style={style.postIt}>
+                            <Card style={style.postIt}>
                             <CardHeader
                                 title={note.title}
                             />
@@ -163,7 +163,10 @@ const style = {
     },
     scroll:{
         maxHeight:'91%',
-        overflowY:'scroll'
+        overflowY:'scroll',
+        display:'flex',
+        alignSelf:'flex-end',
+        flexDirection:'column'
     }
   }
 

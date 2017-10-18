@@ -24,7 +24,6 @@ class NoteForm extends Component{
     render(){
         return(
             <div>
-            <RaisedButton label="NYTT NOTAT" primary={true} onClick={this.handleOpen} fullWidth={true}/>
             <Dialog
                 title="NYTT NOTAT"
                 modal={false}
@@ -48,9 +47,16 @@ class NoteForm extends Component{
             }} />
 
             </Dialog>
+            <RaisedButton style={style.add} label="NYTT NOTAT" primary={true} onClick={this.handleOpen}/>
             </div>
         )
     }
 }
 
 export default NoteForm;
+
+const style = {
+    add:{
+        marginTop:'auto'
+    }
+}
