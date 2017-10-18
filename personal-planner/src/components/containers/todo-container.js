@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Container for the todolist
 const ToDoContainer = (props) => {
     return (
         <div style={styles.containerStyle}>
@@ -8,6 +9,7 @@ const ToDoContainer = (props) => {
     )
 };
 
+// Styles the component with flex container.
 const styles = {
     containerStyle: {
         display: 'flex',
@@ -19,4 +21,5 @@ const styles = {
     },
 }
 
+//Export the container so its avaiable outside the script
 export default ToDoContainer;

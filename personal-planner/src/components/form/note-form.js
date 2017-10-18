@@ -6,48 +6,60 @@ class NoteForm extends Component{
         this.state = {
             desktop:window.innerWidth < 700 ? false : true,
             title:"",
-            text:""
+            text:"",
+            titleErrorText:"",
+            textErrorText:"",
         }
     }
 
+    //Handling events
     handleOpen = () => {
         this.setState({ open: true });
     };
-    handleClose =() => {
+    handleClose = () => {
         this.setState({open:false});
     };
-    handleSubmit(){
-        this.setState({open:false});
-        this.props.submit({title:this.state.title,text:this.state.text});
+    handleSubmit = () => {
+        if(!this.state.title || !this.state.text){
+            this.state.title ? this.setState({titleErrorText:''}) : this.setState({titleErrorText:'Mangler tittel'}); 
+            this.state.text ? this.setState({textErrorText:''}) : this.setState({textErrorText:'Mangler innhold'}); 
+            console.log("mangler noe");
+            return;
+        }else{
+            console.log("Legger til notat");
+            this.props.submit({title:this.state.title,text:this.state.text});
+            this.handleClose();
+        }   
     }
 
     render(){
         return(
             <div>
             <Dialog
-                title="NYTT NOTAT"
+                title="Ny notat"
                 modal={false}
                 open={this.state.open}
                 onRequestClose={this.handleClose}
+                contentStyle={{height: 'auto', width: 'auto'}}
             >
             <TextField
             floatingLabelText="Tittel"
+            errorText={this.state.titleErrorText}
             onChange= {(e)=>this.setState({title:e.target.value})}
             />
             <br/>
             <TextField
             floatingLabelText="Notat"
             multiLine={true}
-            rows={4}
+            rows={2}
+            errorText={this.state.textErrorText}
             onChange= {(e)=>this.setState({text:e.target.value})}
             />
             <br/>
-            <RaisedButton primary={true} label="LEGG TIL" onClick={()=>{
-                this.handleSubmit();
-            }} />
+            <RaisedButton primary={true} label="Legg til" onClick={ () => this.handleSubmit()}/>
 
             </Dialog>
-            <RaisedButton style={style.add} label="NYTT NOTAT" primary={true} onClick={this.handleOpen}/>
+            <RaisedButton style={style.add} label="Ny notat" primary={true} onClick={this.handleOpen}/>
             </div>
         )
     }
@@ -57,6 +69,6 @@ export default NoteForm;
 
 const style = {
     add:{
-        marginTop:'auto'
+        marginTop: 10,
     }
 }

@@ -12,6 +12,11 @@ To run the project do the following:
 1. cd into "./personal-planner-native"
 2. run "npm install"
 3. run "npm start"
+- All of us got an error message when running the app for the first time. The solution is to just run the two sudo commands that the terminal showed:
+
+    sudo sysctl ......
+
+![Image of error](https://imgur.com/a/ISUyy)
 
 For testing purposes we recommend using the app [__Expo__](https://expo.io).
 

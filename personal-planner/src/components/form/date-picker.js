@@ -1,6 +1,7 @@
 import React from 'react';
 import { DatePicker } from 'material-ui';
 
+//Form for choosing the date in the calendar.
 const DateForm = (props) => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', marginRight: props.marginRight}}>
