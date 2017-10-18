@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
+import { RaisedButton, Dialog, DropDownMenu, MenuItem, FlatButton } from 'material-ui';
+import moment from 'moment';
+import 'moment/locale/nb';
 import { DateForm, TimePickerForm } from '../components/form';
 import ToDoContainer from '../components/containers/todo-container';
 import NotesContainer from '../components/containers/notes-container';
 import CalendarContainer from '../components/containers/calendar-container';
 import Calendar from '../components/calendar/calendar';
-import moment from 'moment';
-import 'moment/locale/nb';
 import TodoList from '../components/lists/todo-list';
 import NoteList from '../components/lists/note-list';
 
@@ -226,8 +226,7 @@ const style = {
     },
     h1: {
         fontFamily: 'Roboto',
-        fontWeight: '100',
-        
+        fontWeight: '200',
     }
 };
 

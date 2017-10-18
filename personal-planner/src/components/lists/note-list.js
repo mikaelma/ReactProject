@@ -56,14 +56,14 @@ class NoteList extends Component {
                         {this.state.notes.map((note,index)=>{
                             return(
                                 <Card style={style.postIt}>
-                                <CardHeader
-                                    title={note.title}
-                                />
-                                <CardText>{note.text}</CardText>
-                                <CardActions>
-                                <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
-                                </CardActions>
-                            </Card>)
+                                    <CardHeader
+                                        title={note.title}
+                                    />
+                                    <CardText>{note.text}</CardText>
+                                    <CardActions>
+                                        <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
+                                    </CardActions>
+                                </Card>)
                             })}
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const style = {
         height: '100%',
     },
     postIt: {
-        backgroundColor: "#FFEB3B",
+        backgroundColor: "#ECC30B",
         marginTop: 10
     },
     notesStyle: {
