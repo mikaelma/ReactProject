@@ -29,16 +29,18 @@ class App extends Component{
             <div>
                 {/*Wrap the application in the theme*/}
                 <MuiThemeProvider muiTheme={muiTheme}>
-                    <AppBar
-                        title='Kollektivet'
-                        onTitleTouchTap={() => this.nextPath('/') }
-                        showMenuIconButton={false}
-                        iconClassNameRight="fa fa-user"
-                        onRightIconButtonTouchTap={() => this.nextPath('/Profile') }
-                        titleStyle={{fontSize: '40pt', fontFamily: 'Roboto Condensed'}}
-                    >
-                    </AppBar>
-                    <Main />
+                    <div>
+                        <AppBar
+                            title='Kollektivet'
+                            onTitleTouchTap={() => this.nextPath('/') }
+                            showMenuIconButton={false}
+                            iconClassNameRight="fa fa-user"
+                            onRightIconButtonTouchTap={() => this.nextPath('/Profile') }
+                            titleStyle={{fontSize: '40pt', fontFamily: 'Roboto Condensed'}}
+                        >
+                        </AppBar>
+                        <Main />
+                    </div>
                 </MuiThemeProvider>
             </div>
         )

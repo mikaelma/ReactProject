@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Avatar, RaisedButton, TextField} from 'material-ui';
 
+
 class ProfilePage extends Component {
 
     constructor(props) {
@@ -182,7 +183,7 @@ class ProfilePage extends Component {
                         alignContent: 'center',
                         alignItems: 'center'
                     }}>
-
+                    <h1 style={style.h1}>Profil</h1>
                     {/*
                     The avatar is just a thumbnail profile picture.
                     There is no functionality for changing profile pic
@@ -207,6 +208,10 @@ const style = {
         display: 'flex',
         flexDirection: 'column',
         flex: 1
+    },
+    h1: {
+        fontFamily: 'Roboto',
+        fontWeight: '200',
     }
 };
 
