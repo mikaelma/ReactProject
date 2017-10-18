@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import {StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import { Calendar, Profile, TodoList, BookingForm } from '../screens';
+import { Calendar, Profile, TodoList, BookingForm,Notes,AddNotes} from '../screens';
 import { FontAwesome } from '@expo/vector-icons';
 import colors from './colors';
 
@@ -101,7 +101,7 @@ export const MainTabs = TabNavigator({
                     },
                     headerStyle: {
                         backgroundColor: colors.primaryColor,
-                        marginTop: Platform.OS === 'android' ? 24 : 0,
+                        marginTop: Platform.OS === 'android' ? 24 : 0
                     },
                     title: 'Profil'
                 }
@@ -115,7 +115,38 @@ export const MainTabs = TabNavigator({
             )
         }
     },
-}, {
+    Notes:{
+     screen: StackNavigator({   
+         NotesView:{
+             screen:Notes,
+             navigationOptions:{
+                 headerTitleStyle:{
+                     color:colors.white,
+                     fontSize:30,
+                 },
+                 headerStyle:{
+                     backgroundColor:colors.primaryColor,
+                     marginTop:Platform.OS === 'android' ? 24: 0
+                 },
+                 title:'Notater'
+             }
+         },AddNoteView:{
+             screen:AddNotes,
+             navigationOptions:{
+                headerTitleStyle:{
+                    color:colors.white,
+                    fontSize:30,
+                },
+                headerStyle:{
+                    backgroundColor:colors.primaryColor,
+                    marginTop:Platform.OS === 'android' ? 24: 0
+                },
+                title:'Notater'
+             }
+         }
+     })   
+    }
+    }, {
     //All options for the bottom navigator/tabnavigator
     tabBarPosition: 'bottom',
     tabBarComponent: TabBarBottom,

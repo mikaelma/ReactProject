@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, AsyncStorage, ScrollView, TextInput} from 'react-native';
-import {Avatar, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
-import colors from '../config/colors.js'
-
+import {Avatar, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
+import colors from '../config/colors.js';
 
 class Profile extends Component {
     constructor(props) {
@@ -108,6 +107,7 @@ class Profile extends Component {
                     The avatar is just a thumbnail profile picture.
                     There is no functionality for changing profile pic
                     */}
+
                     <Avatar
                         xlarge={true}
                         rounded={true}
@@ -131,7 +131,6 @@ class Profile extends Component {
                     </View>
 
                     <Button
-
                         raised={true}
                         style={styles.buttonStyle}
                         textStyle={{fontWeight: 'bold'}}
@@ -148,8 +147,9 @@ class Profile extends Component {
                 <ScrollView style={{height: '200%', width: '100%'}}
                             keyboardDismissMode={'on-drag'}
                 >
+
                         <View style={{marginTop: 10, marginLeft:25, marginRight: 10}}>
-                            <FormLabel>Fornavn</FormLabel>
+                            <FormLabel containerStyle={styles.formLabelStyle}>Fornavn</FormLabel>
                             <TextInput  style={styles.textInputStyle}
                                         value={this.state.firstnameField}
                                         onChangeText={(text) => this.setState({
@@ -163,7 +163,7 @@ class Profile extends Component {
                         </View>
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
-                            <FormLabel>Etternavn</FormLabel>
+                            <FormLabel containerStyle={styles.formLabelStyle}>Etternavn</FormLabel>
                             <TextInput  style={styles.textInputStyle}
                                         value={this.state.surnameField}
                                         onChangeText={(text) => this.setState({
@@ -177,7 +177,7 @@ class Profile extends Component {
                         </View>
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel containerStyle={styles.formLabelStyle}>Email</FormLabel>
                             <TextInput  style={styles.textInputStyle}
                                         value={this.state.emailField}
                                         onChangeText={(text) => this.setState({emailField: text, emailErrorText: ''})}
@@ -188,7 +188,7 @@ class Profile extends Component {
                         </View>
 
                         <View style={{marginTop: 5, marginLeft:25, marginRight: 10}}>
-                            <FormLabel>Telefon-nummer</FormLabel>
+                            <FormLabel containerStyle={styles.formLabelStyle}>Telefon-nummer</FormLabel>
                             <TextInput  style={styles.textInputStyle}
                                         value={this.state.telephoneField}
                                         onChangeText={(text) => this.setState({
@@ -256,13 +256,23 @@ const styles = {
     },
 
     textInputStyle:{
-        width: 300,
         height: 50,
+        marginRight: 15,
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
         paddingLeft: 10,
         backgroundColor: '#F0F0F0',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center'
+    },
+
+    formLabelStyle:{
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center'
     }
 };
 
