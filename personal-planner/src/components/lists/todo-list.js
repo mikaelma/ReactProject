@@ -78,6 +78,7 @@ class TodoList extends Component {
 
                     {/*The textfield for adding new todo elements*/}
                     <TextField
+                        fullWidth={true}
                         onKeyDown={(e) => this.handleFieldKeyDown(e)}
                         defaultValue=""
                         //maxLength="24"
@@ -112,7 +113,7 @@ const style = {
     listStyle: {
         display: 'flex',
         flexDirection: 'column',
-        width: '50%',
+        width: '90%',
         height: '100%',
     },
 }

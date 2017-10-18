@@ -11,7 +11,6 @@ class NoteList extends Component {
         this.state = {
             notes: []
         };
-
     }
 
     //Gathering elements from local storage and putting them in state.
@@ -88,7 +87,7 @@ const style = {
     notesStyle: {
         display:'flex',
         flexDirection:'column',
-        width:'50%',
+        width:'70%',
         height:'100%',
     },
     scroll: {

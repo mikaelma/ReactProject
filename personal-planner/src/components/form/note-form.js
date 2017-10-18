@@ -58,6 +58,6 @@ export default NoteForm;
 
 const style = {
     add:{
-        marginTop:'auto'
+        marginTop: 10,
     }
 }
