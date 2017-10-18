@@ -46,7 +46,7 @@ class BookingForm extends Component{
                 <Picker
                     mode="dialog"
                     style={{marginTop: Platform.OS === 'android' ? 0 : -40}}
-                    selectedValue={this.state.language}
+                    selectedValue={this.state.value}
                     onValueChange={(itemValue, itemIndex) => this.setState({value: itemValue})}>
                     <Picker.Item label="Bad" value="Bad" />
                     <Picker.Item label="Kjøkken" value="Kjøkken" />

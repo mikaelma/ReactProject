@@ -63,7 +63,7 @@ class NoteList extends Component {
                                     <CardHeader
                                         title={note.title}
                                     />
-                                    <CardText>{note.text}</CardText>
+                                    <CardText actAsExpander={true}>{note.text}</CardText>
                                     <CardActions>
                                         <IconButton iconClassName="fa fa-times" onClick={(e) =>self.removeNote(e,index) }/>
                                     </CardActions>
